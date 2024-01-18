@@ -39,7 +39,7 @@ testpaths = ["tests"]
 
 [tool.black]
 line_length = 90
-target_version = ["py310"]
+target_version = ["py311"]
 
 [tool.ruff]
 exclude = [
@@ -51,7 +51,8 @@ exclude = [
     "venv",
 ]
 ignore = []
-line_length = 90
+tab-size = 4
+line-length = 90
 select = [
     "E",
     "F",
