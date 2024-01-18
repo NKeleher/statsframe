@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "datasummary"
+version = "0.1.0"
+description = "Customizable data and model summaries in Python."
+authors = ["Niall Keleher <niall.keleher@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+polars = "^0.20.5"
+pandas = "^2.1.4"
+great-tables = "^0.1.5"
+seaborn = "^0.13.1"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^7.4.4"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
