@@ -3,9 +3,7 @@ name = "datasummary"
 version = "0.1.0"
 description = "Customizable data and model summaries in Python."
 authors = ["Niall Keleher <niall.keleher@gmail.com>"]
-packages = [
-    { include = "*", from = "src" }
-]
+packages = [{ include = "*", from = "src" }]
 license = "MIT"
 readme = "README.md"
 homepage = "https://github.com/NKeleher/datasummary#readme"
@@ -17,6 +15,8 @@ polars = "^0.20.5"
 pandas = "^2.1.4"
 great-tables = "^0.1.5"
 seaborn = "^0.13.1"
+pyarrow = "^14.0.2"
+sparklines = "^0.4.2"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.4"
@@ -32,7 +32,6 @@ mypy = "^1.8.0"
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
-
 [tool.pytest.ini_options]
 addopts = ["-vvv"]
 testpaths = ["tests"]
@@ -42,25 +41,9 @@ line_length = 90
 target_version = ["py311"]
 
 [tool.ruff]
-exclude = [
-    ".venv",
-    ".git",
-    "__pycache__",
-    "build",
-    "dist",
-    "venv",
-]
+exclude = [".venv", ".git", "__pycache__", "build", "dist", "venv"]
 ignore = []
 tab-size = 4
 line-length = 90
-select = [
-    "E",
-    "F",
-    "W",
-    "I001",
-]
+select = ["E", "F", "W", "I001"]
 src = ["src", "tests"]
-
-[mypy]
-files = ["src"]
-strict_optional = false
