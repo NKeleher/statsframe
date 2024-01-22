@@ -1,8 +1,8 @@
 # Define datasummary version
 from importlib_metadata import version as _v
 
-# __version__ = "0.1.0"
-__version__ = _v("great_tables")
+# __version__ = "0.0.1"
+__version__ = _v("datasummary")
 
 del _v
 
