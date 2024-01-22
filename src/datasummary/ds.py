@@ -7,16 +7,14 @@ import polars.selectors as cs
 from great_tables import GT  # md, html
 from great_tables._tbl_data import DataFrameLike  # , SeriesLike, TblData
 
-float_cols = ["Missing (%)", "Mean", "SD", "Min", "Median", "Max"]
-moments_cols = ["Mean", "Variance", "Skewness", "Kurtosis"]
-full_cols = ["Missing (%)", "Mean", "SD", "Min", "Median", "Max", "Skewness", "Kurtosis"]
-stats_cols = ["Unique (#)"] + float_cols
+cat_cols = []
 
 
 def datasummary_skim(
     data: pl.DataFrame,
     type: str = "numeric",
-    output: str = "default",
+    stats: str = "simple",
+    output: str = None,
     float_precision: int = 2,
     histogram: bool = False,
     title: str = "Summary Statistics",
@@ -33,7 +31,8 @@ def datasummary_skim(
         type (str, optional): The type of summary statistics to generate.
             Defaults to "numeric".
         output (str, optional): The output format for the summary statistics.
-            Defaults to "default".
+            Defaults to None.
+        stats (str, optional): The summary statistics to return. Defaults to "simple".
         float_precision (int, optional): The number of decimal places to round
             float values when formatting in table output.
             Defaults to 2.
@@ -62,18 +61,40 @@ def datasummary_skim(
     """
 
     # methods depend on the data being a polars DataFrame
-    df = convert_df(data)
+    df = convert_to_pl_df(data)
 
     if type == "numeric":
-        stats_tab = _get_numeric_stats(df)
+        stats_dict = {
+            "simple": ["Missing (%)", "Mean", "SD", "Min", "Median", "Max"],
+            "moments": ["Mean", "Variance", "Skewness", "Kurtosis"],
+            "full": [
+                "Missing (%)",
+                "Mean",
+                "SD",
+                "Min",
+                "Median",
+                "Max",
+                "Skewness",
+                "Kurtosis",
+            ],
+        }
+        table_cols = ["Unique (#)"] + stats_dict[stats]
+
+        stats_tab = _datasummary_skim_numeric(df, stats_cols=table_cols)
     elif type == "categorical":
-        stats_tab = _get_categorical_stats(df)
+        stats_dict = {
+            "simple": ["%"],
+            "moments": ["%"],
+            "full": ["%"],
+        }
+        table_cols = ["N"] + stats_dict[stats]
+        stats_tab = _datasummary_skim_categorical(df, stats_cols=table_cols)
 
     align_dict = {"r": "RIGHT", "l": "LEFT", "c": "CENTER"}
     tbl_align = align_dict[align]
 
     output_dict = {
-        "default": None,
+        None: None,
         "markdown": "ASCII_MARKDOWN",
         "simple": "NOTHING",
         "gt": None,
@@ -88,11 +109,12 @@ def datasummary_skim(
         tbl_formatting = "NOTHING"
 
     if output == "gt":
-        gt_stats = GT(stats_tab).fmt_number(columns=float_cols, decimals=2)
-        return gt_stats.tab_header(
-            title="Summary statistics",
+        gt_stats = GT(stats_tab).fmt_number(columns=stats_dict[stats], decimals=2)
+        gt_stats.tab_header(
+            title=title,
             subtitle=f"Rows: {data.height}, Columns: {data.width}",
         )
+        return stats_tab
 
     else:
         with pl.Config(
@@ -103,10 +125,13 @@ def datasummary_skim(
             tbl_hide_column_data_types=True,
             tbl_hide_dataframe_shape=True,
         ):
+            print(f"{title}")
+            print(f"Rows: {data.height}, Columns: {data.width}")
             print(stats_tab)
+        return stats_tab
 
 
-def _get_numeric_stats(data: pl.DataFrame, stats_cols: stats_cols) -> pl.DataFrame:
+def _datasummary_skim_numeric(data: pl.DataFrame, stats_cols: str = None) -> pl.DataFrame:
     """
     Generates summary statistics for a numeric datatypes in a DataFrame.
 
@@ -116,6 +141,8 @@ def _get_numeric_stats(data: pl.DataFrame, stats_cols: stats_cols) -> pl.DataFra
     Returns:
         pl.DataFrame: The summary statistics table.
     """
+    if stats_cols is None:
+        stats_cols = ["Missing (%)", "Mean", "SD", "Min", "Median", "Max"]
     return (
         data.select(cs.numeric().n_unique())
         .cast(pl.Float64, strict=True)
@@ -133,11 +160,13 @@ def _get_numeric_stats(data: pl.DataFrame, stats_cols: stats_cols) -> pl.DataFra
         .extend(data.select(cs.numeric().median()))
         .extend(data.select(cs.numeric().max().cast(pl.Float64, strict=True)))
         .transpose(include_header=True, header_name="", column_names=stats_cols)
-        .with_columns(pl.col("Unique (#)").cast(pl.Int32, strict=True))
+        .with_columns(pl.col("Unique (#)").cast(pl.Int64, strict=True))
     )
 
 
-def _get_categorical_stats(data: pl.DataFrame) -> pl.DataFrame:
+def _datasummary_skim_categorical(
+    data: pl.DataFrame, stats_cols: str = None
+) -> pl.DataFrame:
     """
     Generates summary statistics for a numeric datatypes in a DataFrame.
 
@@ -150,7 +179,7 @@ def _get_categorical_stats(data: pl.DataFrame) -> pl.DataFrame:
     raise NotImplementedError("Not implemented")
 
 
-def convert_df(data: DataFrameLike) -> pl.DataFrame:
+def convert_to_pl_df(data: DataFrameLike) -> pl.DataFrame:
     """
     Converts a DataFrame-like object to a polars DataFrame.
 

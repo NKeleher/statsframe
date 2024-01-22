@@ -1,50 +1,34 @@
-import pytest
 import polars as pl
+from polars.testing import assert_frame_equal
+
 from datasummary.ds import datasummary_skim
 
-# Define a fixture for common test data
-@pytest.fixture
-def data():
-    return pl.DataFrame({
-        "A": [1.0, 2.0, 3.0, 4.0],
-        "B": [4.0, 3.0, 2.0, 1.0]
+df = pl.DataFrame(
+    {
+        "A": [1.0, 0.0, 3.0, 4.0],
+        "B": [4.0, 3.0, 2.0, 1.0],
         "C": ["cat", "dog", "cat", "mouse"],
-        "D": ["red", "blue", "green", "blue"]
-    })
+        "D": ["red", "blue", "green", "blue"],
+    }
+)
 
-# Happy path tests with various realistic test values
-@pytest.mark.parametrize("test_input, type, output, float_precision, histogram, title, notes, align, expected_columns", [
-    pytest.param(data(), "numeric", "default", 2, False, "Summary Statistics", None, "r", ["A", "B"], id="numeric-default"),
-    pytest.param(data(), "categorical", "markdown", 2, False, "Category Summary", None, "l", ["C", "D"], id="categorical-markdown"),
-    pytest.param(data(), "numeric", "simple", 2, True, "Numeric Summary", "Some notes", "c", ["A", "B"], id="numeric-simple-histogram"),
-], indirect=["test_input"])
-def test_datasummary_skim_happy_path(test_input, type, output, float_precision, histogram, title, notes, align, expected_columns):
+expected_df = pl.DataFrame(
+    {
+        "": ["A", "B"],
+        "Unique (#)": [4, 4],
+        "Missing (%)": [0.00, 0.00],
+        "Mean": [2.00, 2.50],
+        "SD": [1.825742, 1.290994],
+        "Min": [0.00, 1.00],
+        "Median": [2.00, 2.50],
+        "Max": [4.00, 4.00],
+    }
+)
+
+
+def test_datasummary_skim_numeric_df(data=df):
     # Act
-    result = datasummary_skim(test_input, type, output, float_precision, histogram, title, notes, align)
+    result = datasummary_skim(data)
 
     # Assert
-    assert all(column in result.columns for column in expected_columns)
-
-# Edge cases
-@pytest.mark.parametrize("test_input, type, output, float_precision, histogram, title, notes, align", [
-    pytest.param(data(), "numeric", "default", 0, False, "Summary Statistics", None, "r", id="float-precision-zero"),
-    pytest.param(data(), "numeric", "default", 10, False, "Summary Statistics", None, "r", id="float-precision-ten"),
-    pytest.param(data(), "numeric", "default", 2, False, "", None, "r", id="empty-title"),
-], indirect=["test_input"])
-def test_datasummary_skim_edge_cases(test_input, type, output, float_precision, histogram, title, notes, align):
-    # Act
-    result = datasummary_skim(test_input, type, output, float_precision, histogram, title, notes, align)
-
-    # Assert
-    assert result is not None
-
-# Error cases
-@pytest.mark.parametrize("test_input, type, output, float_precision, histogram, title, notes, align, expected_exception", [
-    pytest.param(data(), "numeric", "unknown", 2, False, "Summary Statistics", None, "r", ValueError, id="invalid-output-format"),
-    pytest.param(data(), "unknown", "default", 2, False, "Summary Statistics", None, "r", ValueError, id="invalid-type"),
-    pytest.param(data(), "numeric", "default", 2, False, "Summary Statistics", None, "x", ValueError, id="invalid-align"),
-], indirect=["test_input"])
-def test_datasummary_skim_error_cases(test_input, type, output, float_precision, histogram, title, notes, align, expected_exception):
-    # Act & Assert
-    with pytest.raises(expected_exception):
-        datasummary_skim(test_input, type, output, float_precision, histogram, title, notes, align)
+    assert_frame_equal(result, expected_df)

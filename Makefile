@@ -5,3 +5,6 @@ poetry-install:
 
 hooks-all:
 	poetry run pre-commit run --all-files
+
+pytest-cov:
+	poetry run pytest --cov-report term --cov=datasummary tests/
