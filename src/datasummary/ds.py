@@ -7,7 +7,6 @@ import polars.selectors as cs
 from great_tables import GT  # md, html
 from great_tables._tbl_data import DataFrameLike  # , SeriesLike, TblData
 
-# TODO: set the columns based on input arguments "simple", "moments", "full"
 float_cols = ["Missing (%)", "Mean", "SD", "Min", "Median", "Max"]
 moments_cols = ["Mean", "Variance", "Skewness", "Kurtosis"]
 full_cols = ["Missing (%)", "Mean", "SD", "Min", "Median", "Max", "Skewness", "Kurtosis"]
