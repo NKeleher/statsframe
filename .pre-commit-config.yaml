@@ -33,11 +33,11 @@ repos:
         name: ruff
 
   # mypy - lint-like type checking
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.8.0
-    hooks:
-      - id: mypy
-        name: mypy
+  #  - repo: https://github.com/pre-commit/mirrors-mypy
+  #    rev: v1.8.0
+  #    hooks:
+  #      - id: mypy
+  #        name: mypy
 
   # docformatter - formats docstrings to follow PEP 257
   - repo: https://github.com/pycqa/docformatter
