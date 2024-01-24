@@ -1,7 +1,7 @@
 import polars as pl
 from polars.testing import assert_frame_equal
 
-from datasummary.ds import skim
+from pydatasummary.ds import skim
 
 df = pl.DataFrame(
     {

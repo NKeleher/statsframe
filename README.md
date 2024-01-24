@@ -1,35 +1,35 @@
-# datasummary
+# pydatasummary
 
 Customizable data and model summaries in Python.
 
-`datasummary` creates tables that provide descriptive statistics of
+`pydatasummary` creates tables that provide descriptive statistics of
 numeric and categorical data.
 
 The goal is to provide a simple -- yet customizable -- way to summarize
 data and models in Python.
 
-`datasummary` is heavily inspired by [`modelsummary`](https://modelsummary.com/)
+`pydatasummary` is heavily inspired by [`modelsummary`](https://modelsummary.com/)
 in R. The goal is not to replicate all that `modelsummary` does, but to provide
 a way of achieving similar results in Python.
 
-In order to achieve this, `datasummary` builds on the [`polars`](https://docs.pola.rs/)
+In order to achieve this, `pydatasummary` builds on the [`polars`](https://docs.pola.rs/)
 library to produce tables that can be easily customized and exported to other formats.
 
 ## Basic Usage
 
-As an example of `datasummary` usage, the `skim` function provides a
+As an example of `pydatasummary` usage, the `skim` function provides a
 summary of a DataFrame (either `polars.DataFrame` or `pandas.DataFrame`).
-The default summary statistics returned by `datasummary.skim()` are unique values,
+The default summary statistics returned by `pydatasummary.skim()` are unique values,
 percentage missing, mean, standard deviation, minimum, median, and maximum.
 
-Where possible, `datasummary` will print a table to the console and return a
+Where possible, `pydatasummary` will print a table to the console and return a
 polars DataFrame with the summary statistics. This allows for easy customization.
-For example, the `polars.DataFrame` with statistics from `datasummary` can be
+For example, the `polars.DataFrame` with statistics from `pydatasummary` can be
 modified using the [`Great Tables`](https://posit-dev.github.io/great-tables/reference/) package.
 
 ```python
 import polars as pl
-import datasummary as ds
+import pydatasummary as ds
 
 df = pl.read_csv("https://vincentarelbundock.github.io/Rdatasets/csv/datasets/mtcars.csv").drop("rownames")
 
@@ -58,7 +58,7 @@ We can achieve the same result above with a pandas DataFrame.
 
 ```python
 import pandas as pd
-import datasummary as ds
+import pydatasummary as ds
 
 trees_df = pd.read_csv(
     "https://vincentarelbundock.github.io/Rdatasets/csv/datasets/trees.csv"
@@ -81,19 +81,19 @@ Rows: 31, Columns: 3
 ## Contributing
 
 If you encounter a bug, have usage questions, or want to share ideas to make
-the `datasummary` package more useful, please feel free to file an
-[issue](https://github.com/NKeleher/datasummary/issues).
+the `pydatasummary` package more useful, please feel free to file an
+[issue](https://github.com/NKeleher/pydatasummary/issues).
 
 ## Code of Conduct
 
-Please note that the **datasummary** project is released with a
+Please note that the **pydatasummary** project is released with a
 [contributor code of conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/).
 
 By participating in this project you agree to abide by its terms.
 
 ## License
 
-**datasummary** is licensed under the MIT license.
+**pydatasummary** is licensed under the MIT license.
 
 ## Governance
 
