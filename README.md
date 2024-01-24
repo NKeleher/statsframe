@@ -31,7 +31,10 @@ modified using the [`Great Tables`](https://posit-dev.github.io/great-tables/ref
 import polars as pl
 import pydatasummary as ds
 
-df = pl.read_csv("https://vincentarelbundock.github.io/Rdatasets/csv/datasets/mtcars.csv").drop("rownames")
+df = (
+        pl.read_csv("https://vincentarelbundock.github.io/Rdatasets/csv/datasets/mtcars.csv")
+          .drop("rownames")
+    )
 
 stats = ds.skim(df)
 
