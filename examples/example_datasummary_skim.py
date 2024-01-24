@@ -35,7 +35,12 @@ penguins_stats = ds.skim(penguins_df)
 penguins_stats
 
 # %%
-ds.skim(penguins_df, output="markdown", title="Palmer's Penguins Summary Statistics", align="l")
+ds.skim(
+    penguins_df,
+    output="markdown",
+    title="Palmer's Penguins Summary Statistics",
+    align="l",
+)
 
 # %%
 ds.skim(
