@@ -61,13 +61,13 @@ def datasummary_skim(
     """
 
     # methods depend on the data being a polars DataFrame
-    df = convert_to_pl_df(data)
+    data = convert_to_pl_df(data)
 
     # check if the data is numeric or categorical
     if type == "numeric":
-        stats_tab, float_cols = _datasummary_skim_numeric(df, stats=stats)
+        stats_tab, float_cols = _datasummary_skim_numeric(data, stats=stats)
     elif type == "categorical":
-        stats_tab, float_cols = _datasummary_skim_categorical(df, stats=stats)
+        stats_tab, float_cols = _datasummary_skim_categorical(data, stats=stats)
     else:
         raise ValueError("Invalid type argument")
 
