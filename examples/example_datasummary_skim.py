@@ -21,19 +21,13 @@ stats = ds.datasummary_skim(
 )
 
 # %%
-stats = ds.datasummary_skim(df,
-                    stats="moments",
-                    output="markdown",
-                    title="mtcars Summary Statistics",
-                    align="r"
+stats = ds.datasummary_skim(
+    df, stats="moments", output="markdown", title="mtcars Summary Statistics", align="r"
 )
 
 # %%
-stats = ds.datasummary_skim(df,
-                    stats="full",
-                    output="markdown",
-                    title="mtcars Summary Statistics",
-                    align="r"
+stats = ds.datasummary_skim(
+    df, stats="full", output="markdown", title="mtcars Summary Statistics", align="r"
 )
 
 # %%

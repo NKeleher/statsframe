@@ -91,12 +91,10 @@ def datasummary_skim(
     else:
         raise ValueError("Invalid output argument")
 
-
     # details for the table formatting
     align_dict = {"r": "RIGHT", "l": "LEFT", "c": "CENTER"}
     tbl_align = align_dict[align]
     shape_details = f"Rows: {data.height}, Columns: {data.width}"
-
 
     if output == "gt":
         gt_stats = GT(stats_tab).fmt_number(columns=float_cols, decimals=float_precision)
@@ -130,17 +128,17 @@ def _datasummary_skim_numeric(data: pl.DataFrame, stats: str = "simple") -> pl.D
         pl.DataFrame: The summary statistics table.
     """
     stats_dict = {
-            "simple": ["Missing (%)", "Mean", "SD", "Min", "Median", "Max"],
-            "moments": ["Mean", "Variance", "Skewness", "Kurtosis"],
-            "full": [
-                "Missing (%)",
-                "Mean",
-                "SD",
-                "Min",
-                "Median",
-                "Max",
-            ],
-        }
+        "simple": ["Missing (%)", "Mean", "SD", "Min", "Median", "Max"],
+        "moments": ["Mean", "Variance", "Skewness", "Kurtosis"],
+        "full": [
+            "Missing (%)",
+            "Mean",
+            "SD",
+            "Min",
+            "Median",
+            "Max",
+        ],
+    }
 
     float_cols = stats_dict[stats]
     int_cols = ["Unique (#)"]
@@ -148,57 +146,54 @@ def _datasummary_skim_numeric(data: pl.DataFrame, stats: str = "simple") -> pl.D
 
     if stats == "simple":
         stats_tab = (
-                data
-                .select(cs.numeric().n_unique())
-                .cast(pl.Float64, strict=True)
-                .extend(
-                    data.select(
-                        cs.numeric()
-                        .null_count()
-                        .truediv(data.height)
-                        .cast(pl.Float64, strict=True)
-                    )
+            data.select(cs.numeric().n_unique())
+            .cast(pl.Float64, strict=True)
+            .extend(
+                data.select(
+                    cs.numeric()
+                    .null_count()
+                    .truediv(data.height)
+                    .cast(pl.Float64, strict=True)
                 )
-                .extend(data.select(cs.numeric().mean()))
-                .extend(data.select(cs.numeric().std()))
-                .extend(data.select(cs.numeric().min().cast(pl.Float64, strict=True)))
-                .extend(data.select(cs.numeric().median()))
-                .extend(data.select(cs.numeric().max().cast(pl.Float64, strict=True)))
-                .transpose(include_header=True, header_name="", column_names=stats_cols)
-                .with_columns(pl.col("Unique (#)").cast(pl.Int64, strict=True))
             )
+            .extend(data.select(cs.numeric().mean()))
+            .extend(data.select(cs.numeric().std()))
+            .extend(data.select(cs.numeric().min().cast(pl.Float64, strict=True)))
+            .extend(data.select(cs.numeric().median()))
+            .extend(data.select(cs.numeric().max().cast(pl.Float64, strict=True)))
+            .transpose(include_header=True, header_name="", column_names=stats_cols)
+            .with_columns(pl.col("Unique (#)").cast(pl.Int64, strict=True))
+        )
     elif stats == "moments":
         stats_tab = (
-                data
-                .select(cs.numeric().n_unique())
-                .cast(pl.Float64, strict=True)
-                .extend(data.select(cs.numeric().mean()))
-                .extend(data.select(cs.numeric().std()))
-                .extend(data.select(cs.numeric().skew()))
-                .extend(data.select(cs.numeric().kurtosis()))
-                .transpose(include_header=True, header_name="", column_names=stats_cols)
-                .with_columns(pl.col("Unique (#)").cast(pl.Int64, strict=True))
-            )
+            data.select(cs.numeric().n_unique())
+            .cast(pl.Float64, strict=True)
+            .extend(data.select(cs.numeric().mean()))
+            .extend(data.select(cs.numeric().std()))
+            .extend(data.select(cs.numeric().skew()))
+            .extend(data.select(cs.numeric().kurtosis()))
+            .transpose(include_header=True, header_name="", column_names=stats_cols)
+            .with_columns(pl.col("Unique (#)").cast(pl.Int64, strict=True))
+        )
     elif stats == "full":
         stats_tab = (
-                data
-                .select(cs.numeric().n_unique())
-                .cast(pl.Float64, strict=True)
-                .extend(
-                    data.select(
-                        cs.numeric()
-                        .null_count()
-                        .truediv(data.height)
-                        .cast(pl.Float64, strict=True)
-                    )
+            data.select(cs.numeric().n_unique())
+            .cast(pl.Float64, strict=True)
+            .extend(
+                data.select(
+                    cs.numeric()
+                    .null_count()
+                    .truediv(data.height)
+                    .cast(pl.Float64, strict=True)
                 )
-                .extend(data.select(cs.numeric().mean()))
-                .extend(data.select(cs.numeric().std()))
-                .extend(data.select(cs.numeric().min().cast(pl.Float64, strict=True)))
-                .extend(data.select(cs.numeric().median()))
-                .extend(data.select(cs.numeric().max().cast(pl.Float64, strict=True)))
-                .transpose(include_header=True, header_name="", column_names=stats_cols)
-                .with_columns(pl.col("Unique (#)").cast(pl.Int64, strict=True))
+            )
+            .extend(data.select(cs.numeric().mean()))
+            .extend(data.select(cs.numeric().std()))
+            .extend(data.select(cs.numeric().min().cast(pl.Float64, strict=True)))
+            .extend(data.select(cs.numeric().median()))
+            .extend(data.select(cs.numeric().max().cast(pl.Float64, strict=True)))
+            .transpose(include_header=True, header_name="", column_names=stats_cols)
+            .with_columns(pl.col("Unique (#)").cast(pl.Int64, strict=True))
         )
     else:
         raise ValueError("Invalid stats argument")
@@ -218,10 +213,10 @@ def _datasummary_skim_categorical(
         pl.DataFrame: The summary statistics table.
     """
     stats_dict = {
-            "simple": ["%"],
-            "moments": ["%"],
-            "full": ["%"],
-        }
+        "simple": ["%"],
+        "moments": ["%"],
+        "full": ["%"],
+    }
     float_cols = stats_dict[stats]
     int_cols = ["Unique (#)"]
     stats_cols = int_cols + float_cols
