@@ -4,6 +4,13 @@ import polars as pl
 
 import datasummary as ds
 
+# %%
+df = pl.read_csv(
+    "https://vincentarelbundock.github.io/Rdatasets/csv/datasets/mtcars.csv"
+).drop("rownames")
+
+stats = ds.skim(df)
+
 # %% [markdown]
 # Import a csv file to a polars DataFrame:
 
