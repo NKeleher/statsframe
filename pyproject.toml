@@ -1,13 +1,13 @@
 [tool.poetry]
-name = "datasummary"
+name = "pydatasummary"
 version = "0.0.1"
 description = "Customizable data and model summaries in Python."
 authors = ["Niall Keleher <niall.keleher@gmail.com>"]
 packages = [{ include = "*", from = "src" }]
 license = "MIT"
 readme = "README.md"
-homepage = "https://github.com/NKeleher/datasummary#readme"
-repository = "https://github.com/NKeleher/datasummary"
+homepage = "https://github.com/NKeleher/pydatasummary#readme"
+repository = "https://github.com/NKeleher/pydatasummary"
 keywords = ["tables", "statistics", "econometrics"]
 classifiers = [
     # https://pypi.org/classifiers/
