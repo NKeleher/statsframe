@@ -123,6 +123,7 @@ def _skim_numeric(data: pl.DataFrame, stats: str = "simple") -> pl.DataFrame:
 
     Args:
         data (pl.DataFrame): The input DataFrame.
+        stats (str, optional): The summary statistics to return. Defaults to "simple".
 
     Returns:
         pl.DataFrame: The summary statistics table.
@@ -206,6 +207,7 @@ def _skim_categorical(data: pl.DataFrame, stats: str = "simple") -> pl.DataFrame
 
     Args:
         data (pl.DataFrame): The input DataFrame.
+        stats (str, optional): The summary statistics to return. Defaults to "simple".
 
     Returns:
         pl.DataFrame: The summary statistics table.
