@@ -1,35 +1,53 @@
 # %%
+import pandas as pd
 import polars as pl
 
 import datasummary as ds
 
-# %%
-df = pl.read_csv("https://vincentarelbundock.github.io/Rdatasets/csv/datasets/mtcars.csv")
+# %% [markdown]
+# Import a csv file to a polars DataFrame:
 
 # %%
-stats = ds.datasummary_skim(df)
+cars_df = pl.read_csv(
+    "https://vincentarelbundock.github.io/Rdatasets/csv/datasets/mtcars.csv"
+)
+
 
 # %%
-print(stats)
+cars_stats = ds.datasummary_skim(cars_df)
 
 # %%
-stats
+print(cars_stats)
 
 # %%
-stats = ds.datasummary_skim(
-    df, output="markdown", title="mtcars Summary Statistics", align="l"
+cars_stats
+
+# %%
+ds.datasummary_skim(
+    cars_df, output="markdown", title="mtcars Summary Statistics", align="l"
 )
 
 # %%
-stats = ds.datasummary_skim(
-    df, stats="moments", output="markdown", title="mtcars Summary Statistics", align="r"
+ds.datasummary_skim(
+    cars_df,
+    stats="moments",
+    output="markdown",
+    title="mtcars Summary Statistics",
+    align="r",
 )
 
 # %%
-stats = ds.datasummary_skim(
-    df, stats="full", output="markdown", title="mtcars Summary Statistics", align="r"
+ds.datasummary_skim(
+    cars_df, stats="full", output="markdown", title="mtcars Summary Statistics", align="r"
+)
+
+# %% [markdown]
+# Works with pandas DataFrames too:
+
+# %%
+trees_df = pd.read_csv(
+    "https://vincentarelbundock.github.io/Rdatasets/csv/datasets/trees.csv"
 )
 
 # %%
-print(stats)
-# %%
+trees_stats = ds.datasummary_skim(trees_df)

@@ -94,7 +94,7 @@ def datasummary_skim(
     # details for the table formatting
     align_dict = {"r": "RIGHT", "l": "LEFT", "c": "CENTER"}
     tbl_align = align_dict[align]
-    shape_details = f"Rows: {data.height}, Columns: {data.width}"
+    shape_details = f"Rows: {df.height}, Columns: {df.width}"
 
     if output == "gt":
         gt_stats = GT(stats_tab).fmt_number(columns=float_cols, decimals=float_precision)
