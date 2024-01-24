@@ -7,17 +7,15 @@ import polars.selectors as cs
 from great_tables import GT  # md, html
 from great_tables._tbl_data import DataFrameLike  # , SeriesLike, TblData
 
-float_cols = ["Missing (%)", "Mean", "SD", "Min", "Median", "Max"]
-moments_cols = ["Mean", "Variance", "Skewness", "Kurtosis"]
-full_cols = ["Missing (%)", "Mean", "SD", "Min", "Median", "Max", "Skewness", "Kurtosis"]
-stats_cols = ["Unique (#)"] + float_cols
+cat_cols = []
 
 
 def datasummary_skim(
     data: pl.DataFrame,
     type: str = "numeric",
-    output: str = "default",
-    float_precision: int = 2,
+    stats: str = "simple",
+    output: str = "polars",
+    float_precision: int = 1,
     histogram: bool = False,
     title: str = "Summary Statistics",
     notes: str = None,
@@ -33,7 +31,8 @@ def datasummary_skim(
         type (str, optional): The type of summary statistics to generate.
             Defaults to "numeric".
         output (str, optional): The output format for the summary statistics.
-            Defaults to "default".
+            Defaults to None.
+        stats (str, optional): The summary statistics to return. Defaults to "simple".
         float_precision (int, optional): The number of decimal places to round
             float values when formatting in table output.
             Defaults to 2.
@@ -62,38 +61,47 @@ def datasummary_skim(
     """
 
     # methods depend on the data being a polars DataFrame
-    df = convert_df(data)
+    df = convert_to_pl_df(data)
 
+    # check if the data is numeric or categorical
     if type == "numeric":
-        stats_tab = _get_numeric_stats(df)
+        stats_tab, float_cols = _datasummary_skim_numeric(df, stats=stats)
     elif type == "categorical":
-        stats_tab = _get_categorical_stats(df)
+        stats_tab, float_cols = _datasummary_skim_categorical(df, stats=stats)
+    else:
+        raise ValueError("Invalid type argument")
 
-    align_dict = {"r": "RIGHT", "l": "LEFT", "c": "CENTER"}
-    tbl_align = align_dict[align]
-
+    # format the output
     output_dict = {
-        "default": None,
+        "polars": None,
         "markdown": "ASCII_MARKDOWN",
         "simple": "NOTHING",
         "gt": None,
     }
     tbl_formatting = output_dict[output]
 
-    if output == "default":
+    if output == "polars":
         tbl_formatting = None
     elif output == "markdown":
         tbl_formatting = "ASCII_MARKDOWN"
     elif output == "simple":
         tbl_formatting = "NOTHING"
+    elif output == "gt":
+        tbl_formatting = None
+    else:
+        raise ValueError("Invalid output argument")
+
+    # details for the table formatting
+    align_dict = {"r": "RIGHT", "l": "LEFT", "c": "CENTER"}
+    tbl_align = align_dict[align]
+    shape_details = f"Rows: {data.height}, Columns: {data.width}"
 
     if output == "gt":
-        gt_stats = GT(stats_tab).fmt_number(columns=float_cols, decimals=2)
-        return gt_stats.tab_header(
-            title="Summary statistics",
-            subtitle=f"Rows: {data.height}, Columns: {data.width}",
+        gt_stats = GT(stats_tab).fmt_number(columns=float_cols, decimals=float_precision)
+        gt_stats.tab_header(
+            title=title,
+            subtitle=shape_details,
         )
-
     else:
         with pl.Config(
             float_precision=float_precision,
@@ -103,10 +111,13 @@ def datasummary_skim(
             tbl_hide_column_data_types=True,
             tbl_hide_dataframe_shape=True,
         ):
+            print(f"{title}")
+            print(f"{shape_details}")
             print(stats_tab)
+    return stats_tab
 
 
-def _get_numeric_stats(data: pl.DataFrame, stats_cols: stats_cols) -> pl.DataFrame:
+def _datasummary_skim_numeric(data: pl.DataFrame, stats: str = "simple") -> pl.DataFrame:
     """
     Generates summary statistics for a numeric datatypes in a DataFrame.
 
@@ -116,28 +127,82 @@ def _get_numeric_stats(data: pl.DataFrame, stats_cols: stats_cols) -> pl.DataFra
     Returns:
         pl.DataFrame: The summary statistics table.
     """
-    return (
-        data.select(cs.numeric().n_unique())
-        .cast(pl.Float64, strict=True)
-        .extend(
-            data.select(
-                cs.numeric()
-                .null_count()
-                .truediv(data.height)
-                .cast(pl.Float64, strict=True)
+    stats_dict = {
+        "simple": ["Missing (%)", "Mean", "SD", "Min", "Median", "Max"],
+        "moments": ["Mean", "Variance", "Skewness", "Kurtosis"],
+        "full": [
+            "Missing (%)",
+            "Mean",
+            "SD",
+            "Min",
+            "Median",
+            "Max",
+        ],
+    }
+
+    float_cols = stats_dict[stats]
+    int_cols = ["Unique (#)"]
+    stats_cols = int_cols + float_cols
+
+    if stats == "simple":
+        stats_tab = (
+            data.select(cs.numeric().n_unique())
+            .cast(pl.Float64, strict=True)
+            .extend(
+                data.select(
+                    cs.numeric()
+                    .null_count()
+                    .truediv(data.height)
+                    .cast(pl.Float64, strict=True)
+                )
             )
+            .extend(data.select(cs.numeric().mean()))
+            .extend(data.select(cs.numeric().std()))
+            .extend(data.select(cs.numeric().min().cast(pl.Float64, strict=True)))
+            .extend(data.select(cs.numeric().median()))
+            .extend(data.select(cs.numeric().max().cast(pl.Float64, strict=True)))
+            .transpose(include_header=True, header_name="", column_names=stats_cols)
+            .with_columns(pl.col("Unique (#)").cast(pl.Int64, strict=True))
         )
-        .extend(data.select(cs.numeric().mean()))
-        .extend(data.select(cs.numeric().std()))
-        .extend(data.select(cs.numeric().min().cast(pl.Float64, strict=True)))
-        .extend(data.select(cs.numeric().median()))
-        .extend(data.select(cs.numeric().max().cast(pl.Float64, strict=True)))
-        .transpose(include_header=True, header_name="", column_names=stats_cols)
-        .with_columns(pl.col("Unique (#)").cast(pl.Int32, strict=True))
-    )
+    elif stats == "moments":
+        stats_tab = (
+            data.select(cs.numeric().n_unique())
+            .cast(pl.Float64, strict=True)
+            .extend(data.select(cs.numeric().mean()))
+            .extend(data.select(cs.numeric().std()))
+            .extend(data.select(cs.numeric().skew()))
+            .extend(data.select(cs.numeric().kurtosis()))
+            .transpose(include_header=True, header_name="", column_names=stats_cols)
+            .with_columns(pl.col("Unique (#)").cast(pl.Int64, strict=True))
+        )
+    elif stats == "full":
+        stats_tab = (
+            data.select(cs.numeric().n_unique())
+            .cast(pl.Float64, strict=True)
+            .extend(
+                data.select(
+                    cs.numeric()
+                    .null_count()
+                    .truediv(data.height)
+                    .cast(pl.Float64, strict=True)
+                )
+            )
+            .extend(data.select(cs.numeric().mean()))
+            .extend(data.select(cs.numeric().std()))
+            .extend(data.select(cs.numeric().min().cast(pl.Float64, strict=True)))
+            .extend(data.select(cs.numeric().median()))
+            .extend(data.select(cs.numeric().max().cast(pl.Float64, strict=True)))
+            .transpose(include_header=True, header_name="", column_names=stats_cols)
+            .with_columns(pl.col("Unique (#)").cast(pl.Int64, strict=True))
+        )
+    else:
+        raise ValueError("Invalid stats argument")
+    return stats_tab, float_cols
 
 
-def _get_categorical_stats(data: pl.DataFrame) -> pl.DataFrame:
+def _datasummary_skim_categorical(
+    data: pl.DataFrame, stats: str = "simple"
+) -> pl.DataFrame:
     """
     Generates summary statistics for a numeric datatypes in a DataFrame.
 
@@ -150,7 +215,7 @@ def _get_categorical_stats(data: pl.DataFrame) -> pl.DataFrame:
     raise NotImplementedError("Not implemented")
 
 
-def convert_df(data: DataFrameLike) -> pl.DataFrame:
+def convert_to_pl_df(data: DataFrameLike) -> pl.DataFrame:
     """
     Converts a DataFrame-like object to a polars DataFrame.
 

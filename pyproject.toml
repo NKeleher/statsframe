@@ -43,6 +43,7 @@ black = "^23.12.1"
 bandit = "^1.7.6"
 docformatter = "^1.7.5"
 mypy = "^1.8.0"
+jupyterlab = "^4.0.11"
 
 [build-system]
 requires = ["poetry-core"]
@@ -59,7 +60,7 @@ target_version = ["py311"]
 [tool.ruff]
 exclude = [".venv", ".git", "__pycache__", "build", "dist", "venv"]
 ignore = []
-tab-size = 4
+indent-width = 4
 line-length = 90
 select = ["E", "F", "W", "I001"]
 src = ["src", "tests"]
