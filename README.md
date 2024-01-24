@@ -8,11 +8,12 @@ numeric and categorical data.
 The goal is to provide a simple -- yet customizable -- way to summarize
 data and models in Python.
 
-`datasummary` is heavily inspired by [`modelsummary`](https://modelsummary.com/) in R. The goal is
-not to replicate all that `modelsummary` does, but to provide a way of
-achieving similar results in Python.
+`datasummary` is heavily inspired by [`modelsummary`](https://modelsummary.com/)
+in R. The goal is not to replicate all that `modelsummary` does, but to provide
+a way of achieving similar results in Python.
 
-In order to achieve this, `datasummary` builds on the [`polars`](https://docs.pola.rs/) library to produce tables that can be easily customized and exported to other formats.
+In order to achieve this, `datasummary` builds on the [`polars`](https://docs.pola.rs/)
+library to produce tables that can be easily customized and exported to other formats.
 
 ```python
 import polars as pl
