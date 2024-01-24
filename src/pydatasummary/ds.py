@@ -120,13 +120,15 @@ def _skim_numeric(data: pl.DataFrame, stats: str = "simple") -> pl.DataFrame:
     stats_dict = {
         "simple": ["Missing (%)", "Mean", "SD", "Min", "Median", "Max"],
         "moments": ["Mean", "Variance", "Skewness", "Kurtosis"],
-        "full": [
+        "detail": [
             "Missing (%)",
             "Mean",
             "SD",
             "Min",
             "Median",
             "Max",
+            "Skewness",
+            "Kurtosis",
         ],
     }
 
@@ -165,7 +167,7 @@ def _skim_numeric(data: pl.DataFrame, stats: str = "simple") -> pl.DataFrame:
             .transpose(include_header=True, header_name="", column_names=stats_cols)
             .with_columns(pl.col("Unique (#)").cast(pl.Int64, strict=True))
         )
-    elif stats == "full":
+    elif stats == "detail":
         stats_tab = (
             data.select(cs.numeric().n_unique())
             .cast(pl.Float64, strict=True)
@@ -182,6 +184,8 @@ def _skim_numeric(data: pl.DataFrame, stats: str = "simple") -> pl.DataFrame:
             .extend(data.select(cs.numeric().min().cast(pl.Float64, strict=True)))
             .extend(data.select(cs.numeric().median()))
             .extend(data.select(cs.numeric().max().cast(pl.Float64, strict=True)))
+            .extend(data.select(cs.numeric().skew()))
+            .extend(data.select(cs.numeric().kurtosis()))
             .transpose(include_header=True, header_name="", column_names=stats_cols)
             .with_columns(pl.col("Unique (#)").cast(pl.Int64, strict=True))
         )
