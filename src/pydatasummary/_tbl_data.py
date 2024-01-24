@@ -92,8 +92,9 @@ else:
     class NpNan(AbstractBackend):
         _backends = [("numpy", "nan")]
 
-    # 2023-01-24 FROM GREAT TABLES: these types are imported throughout gt, so we need to either put
-    # those imports under TYPE_CHECKING, or continue to make available dynamically here.
+    # 2023-01-24 FROM GREAT TABLES: these types are imported throughout gt,
+    # so we need to either put those imports under TYPE_CHECKING, or continue to
+    # make available dynamically here.
     class DataFrameLike(ABC):
         """
         Represent some DataFrame.
@@ -318,8 +319,9 @@ def _(
     if isinstance(expr, list):
         return _eval_select_from_list(list(data.columns), expr)
     elif callable(expr):
-        # 2023-01-24 FROM GREAT TABLES: currently, we call on each string, but we could be calling on
-        # pd.DataFrame.columns instead (which would let us use pandas .str methods)
+        # 2023-01-24 FROM GREAT TABLES: currently, we call on each string,
+        # but we could be calling on pd.DataFrame.columns instead (which would let
+        # us use pandas .str methods)
         col_pos = {k: ii for ii, k in enumerate(list(data.columns))}
         return [(col, col_pos[col]) for col in data.columns if expr(col)]
 
