@@ -71,7 +71,7 @@ else:
     class NpNan(AbstractBackend):
         _backends = [("numpy", "nan")]
 
-    # TODO: these types are imported throughout gt, so we need to either put
+    # 2023-01-24 FROM GREAT TABLES: these types are imported throughout gt, so we need to either put
     # those imports under TYPE_CHECKING, or continue to make available dynamically here.
     class DataFrameLike(ABC):
         """
@@ -190,7 +190,7 @@ def _set_cell(data: DataFrameLike, row: int, column: str, value: Any):
 
 @_set_cell.register(PdDataFrame)
 def _(data, row: int, column: str, value: Any):
-    # TODO: This assumes column names are unique
+    # 2023-01-24 FROM GREAT TABLES: This assumes column names are unique
     # if this is violated, get_loc will return a mask
     col_indx = data.columns.get_loc(column)
     data.iloc[row, col_indx] = value
@@ -250,7 +250,7 @@ def _(data: PdDataFrame, group_key: str) -> Dict[Any, List[int]]:
 
 @group_splits.register
 def _(data: PlDataFrame, group_key: str) -> Dict[Any, List[int]]:
-    # TODO: should ensure row count name isn't already in data
+    # 2023-01-24 FROM GREAT TABLES: should ensure row count name isn't already in data
     import polars as pl
 
     groups = (
@@ -297,7 +297,7 @@ def _(
     if isinstance(expr, list):
         return _eval_select_from_list(list(data.columns), expr)
     elif callable(expr):
-        # TODO: currently, we call on each string, but we could be calling on
+        # 2023-01-24 FROM GREAT TABLES: currently, we call on each string, but we could be calling on
         # pd.DataFrame.columns instead (which would let us use pandas .str methods)
         col_pos = {k: ii for ii, k in enumerate(list(data.columns))}
         return [(col, col_pos[col]) for col in data.columns if expr(col)]
@@ -309,7 +309,7 @@ def _(
 def _(
     data: PlDataFrame, expr: Union[List[str], _selector_proxy_], strict=True
 ) -> _NamePos:
-    # TODO: how to annotate type of a polars selector?
+    # 2023-01-24 FROM GREAT TABLES: how to annotate type of a polars selector?
     # Seems to be polars.selectors._selector_proxy_.
     from polars import Expr, selectors
 
@@ -334,7 +334,7 @@ def _eval_select_from_list(
 ) -> list[tuple[str, int]]:
     col_pos = {k: ii for ii, k in enumerate(columns)}
 
-    # TODO: should prohibit duplicate names in expr?
+    # 2023-01-24 FROM GREAT TABLES: should prohibit duplicate names in expr?
     res: list[tuple[str, int]] = []
     for col in expr:
         if isinstance(col, str):
