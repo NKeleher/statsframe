@@ -4,41 +4,60 @@ import polars as pl
 
 import datasummary as ds
 
+# %%
+df = pl.read_csv(
+    "https://vincentarelbundock.github.io/Rdatasets/csv/datasets/mtcars.csv"
+).drop("rownames")
+
+stats = ds.skim(df)
+
 # %% [markdown]
 # Import a csv file to a polars DataFrame:
 
 # %%
-cars_df = pl.read_csv(
-    "https://vincentarelbundock.github.io/Rdatasets/csv/datasets/mtcars.csv"
+penguins_df = pl.read_csv(
+    "https://vincentarelbundock.github.io/Rdatasets/csv/palmerpenguins/penguins.csv"
+).drop("rownames")
+
+# %%
+penguins_df.glimpse()
+
+# %% [markdown]
+# Create a skim table
+
+# %%
+penguins_stats = ds.skim(penguins_df)
+
+# %% [markdown]
+# Return the polars DataFrame with the summary statistics
+
+# %%
+penguins_stats
+
+# %%
+ds.skim(
+    penguins_df,
+    output="markdown",
+    title="Palmer's Penguins Summary Statistics",
+    align="l",
 )
 
-
 # %%
-cars_stats = ds.datasummary_skim(cars_df)
-
-# %%
-print(cars_stats)
-
-# %%
-cars_stats
-
-# %%
-ds.datasummary_skim(
-    cars_df, output="markdown", title="mtcars Summary Statistics", align="l"
-)
-
-# %%
-ds.datasummary_skim(
-    cars_df,
+ds.skim(
+    penguins_df,
     stats="moments",
     output="markdown",
-    title="mtcars Summary Statistics",
+    title="Palmer's Penguins Summary Statistics",
     align="r",
 )
 
 # %%
-ds.datasummary_skim(
-    cars_df, stats="full", output="markdown", title="mtcars Summary Statistics", align="r"
+ds.skim(
+    penguins_df,
+    stats="full",
+    output="markdown",
+    title="Palmer's Penguins Summary Statistics",
+    align="r",
 )
 
 # %% [markdown]
@@ -47,7 +66,12 @@ ds.datasummary_skim(
 # %%
 trees_df = pd.read_csv(
     "https://vincentarelbundock.github.io/Rdatasets/csv/datasets/trees.csv"
-)
+).drop(columns=["rownames"])
 
 # %%
-trees_stats = ds.datasummary_skim(trees_df)
+trees_df.info()
+
+# %%
+trees_stats = ds.skim(trees_df)
+
+# %%

@@ -10,7 +10,7 @@ from great_tables._tbl_data import DataFrameLike  # , SeriesLike, TblData
 cat_cols = []
 
 
-def datasummary_skim(
+def skim(
     data: pl.DataFrame,
     type: str = "numeric",
     stats: str = "simple",
@@ -51,13 +51,13 @@ def datasummary_skim(
 
     Examples:
         # Generate summary statistics for a numeric DataFrame
-        summary = datasummary_skim(data)
+        summary = skim(data)
 
         # Generate summary statistics for a categorical DataFrame
-        summary = datasummary_skim(data, type="categorical")
+        summary = skim(data, type="categorical")
 
         # Generate summary statistics in markdown format
-        summary = datasummary_skim(data, output="markdown")
+        summary = skim(data, output="markdown")
     """
 
     # methods depend on the data being a polars DataFrame
@@ -65,9 +65,9 @@ def datasummary_skim(
 
     # check if the data is numeric or categorical
     if type == "numeric":
-        stats_tab, float_cols = _datasummary_skim_numeric(data, stats=stats)
+        stats_tab, float_cols = _skim_numeric(data, stats=stats)
     elif type == "categorical":
-        stats_tab, float_cols = _datasummary_skim_categorical(data, stats=stats)
+        stats_tab, float_cols = _skim_categorical(data, stats=stats)
     else:
         raise ValueError("Invalid type argument")
 
@@ -117,12 +117,13 @@ def datasummary_skim(
     return stats_tab
 
 
-def _datasummary_skim_numeric(data: pl.DataFrame, stats: str = "simple") -> pl.DataFrame:
+def _skim_numeric(data: pl.DataFrame, stats: str = "simple") -> pl.DataFrame:
     """
     Generates summary statistics for a numeric datatypes in a DataFrame.
 
     Args:
         data (pl.DataFrame): The input DataFrame.
+        stats (str, optional): The summary statistics to return. Defaults to "simple".
 
     Returns:
         pl.DataFrame: The summary statistics table.
@@ -200,14 +201,13 @@ def _datasummary_skim_numeric(data: pl.DataFrame, stats: str = "simple") -> pl.D
     return stats_tab, float_cols
 
 
-def _datasummary_skim_categorical(
-    data: pl.DataFrame, stats: str = "simple"
-) -> pl.DataFrame:
+def _skim_categorical(data: pl.DataFrame, stats: str = "simple") -> pl.DataFrame:
     """
     Generates summary statistics for a numeric datatypes in a DataFrame.
 
     Args:
         data (pl.DataFrame): The input DataFrame.
+        stats (str, optional): The summary statistics to return. Defaults to "simple".
 
     Returns:
         pl.DataFrame: The summary statistics table.
