@@ -15,6 +15,16 @@ a way of achieving similar results in Python.
 In order to achieve this, `datasummary` builds on the [`polars`](https://docs.pola.rs/)
 library to produce tables that can be easily customized and exported to other formats.
 
+## Basic Usage
+
+As an example of `datasummary` usage, the `skim` function provides a
+summary of a DataFrame (either `polars.DataFrame` or `pandas.DataFrame`).
+The default summary statistics returned by `datasummary.skim()` are unique values,
+percentage missing, mean, standard deviation, minimum, median, and maximum.
+
+Where possible, `datasummary` will print a table to the console and return a
+polars DataFrame with the summary statistics. This allows for easy customization.
+
 ```python
 import polars as pl
 import datasummary as ds
@@ -65,3 +75,25 @@ Rows: 31, Columns: 3
 └────────┴────────────┴─────────────┴──────┴──────┴──────┴────────┴──────┘
 
 ```
+
+## Contributing
+
+If you encounter a bug, have usage questions, or want to share ideas to make
+the `datasummary` package more useful, please feel free to file an
+[issue](https://github.com/NKeleher/datasummary/issues).
+
+## Code of Conduct
+
+Please note that the **datasummary** project is released with a
+[contributor code of conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/).
+
+By participating in this project you agree to abide by its terms.
+
+## License
+
+**datasummary** is licensed under the MIT license.
+
+## Governance
+
+This project is primarily maintained by [Niall Keleher](https://twitter.com/nkeleher).
+Contributions from other authors is welcome.
