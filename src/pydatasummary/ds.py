@@ -4,8 +4,8 @@ from __future__ import annotations
 import pandas as pd
 import polars as pl
 import polars.selectors as cs
-from great_tables import GT  # md, html
-from great_tables._tbl_data import DataFrameLike  # , SeriesLike, TblData
+
+from ._tbl_data import DataFrameLike  # , SeriesLike
 
 cat_cols = []
 
@@ -39,9 +39,8 @@ def skim(
         histogram (bool, optional): Whether to include a histogram in the output.
             Defaults to False.
         title (str, optional): The title of the summary statistics table.
-            Only relevant if output is "gt". Defaults to "Summary Statistics".
+            Defaults to "Summary Statistics".
         notes (str, optional): Additional notes or comments.
-            Only relevant if output is "gt".
             Defaults to None.
         align (str, optional): The alignment of the table columns.
             Defaults to "r".
@@ -76,7 +75,6 @@ def skim(
         "polars": None,
         "markdown": "ASCII_MARKDOWN",
         "simple": "NOTHING",
-        "gt": None,
     }
     tbl_formatting = output_dict[output]
 
@@ -86,8 +84,6 @@ def skim(
         tbl_formatting = "ASCII_MARKDOWN"
     elif output == "simple":
         tbl_formatting = "NOTHING"
-    elif output == "gt":
-        tbl_formatting = None
     else:
         raise ValueError("Invalid output argument")
 
@@ -96,24 +92,17 @@ def skim(
     tbl_align = align_dict[align]
     shape_details = f"Rows: {data.height}, Columns: {data.width}"
 
-    if output == "gt":
-        gt_stats = GT(stats_tab).fmt_number(columns=float_cols, decimals=float_precision)
-        gt_stats.tab_header(
-            title=title,
-            subtitle=shape_details,
-        )
-    else:
-        with pl.Config(
-            float_precision=float_precision,
-            tbl_formatting=tbl_formatting,
-            tbl_cell_alignment=tbl_align,
-            tbl_hide_column_names=False,
-            tbl_hide_column_data_types=True,
-            tbl_hide_dataframe_shape=True,
-        ):
-            print(f"{title}")
-            print(f"{shape_details}")
-            print(stats_tab)
+    with pl.Config(
+        float_precision=float_precision,
+        tbl_formatting=tbl_formatting,
+        tbl_cell_alignment=tbl_align,
+        tbl_hide_column_names=False,
+        tbl_hide_column_data_types=True,
+        tbl_hide_dataframe_shape=True,
+    ):
+        print(f"{title}")
+        print(f"{shape_details}")
+        print(stats_tab)
     return stats_tab
 
 
