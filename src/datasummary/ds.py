@@ -65,9 +65,9 @@ def datasummary_skim(
 
     # check if the data is numeric or categorical
     if type == "numeric":
-        stats_tab, int_cols, float_cols = _datasummary_skim_numeric(df, stats=stats)
+        stats_tab, float_cols = _datasummary_skim_numeric(df, stats=stats)
     elif type == "categorical":
-        stats_tab, int_cols, float_cols = _datasummary_skim_categorical(df, stats=stats)
+        stats_tab, float_cols = _datasummary_skim_categorical(df, stats=stats)
     else:
         raise ValueError("Invalid type argument")
 
@@ -197,7 +197,7 @@ def _datasummary_skim_numeric(data: pl.DataFrame, stats: str = "simple") -> pl.D
         )
     else:
         raise ValueError("Invalid stats argument")
-    return stats_tab, int_cols, float_cols
+    return stats_tab, float_cols
 
 
 def _datasummary_skim_categorical(
@@ -212,14 +212,6 @@ def _datasummary_skim_categorical(
     Returns:
         pl.DataFrame: The summary statistics table.
     """
-    stats_dict = {
-        "simple": ["%"],
-        "moments": ["%"],
-        "full": ["%"],
-    }
-    float_cols = stats_dict[stats]
-    int_cols = ["Unique (#)"]
-    stats_cols = int_cols + float_cols
     raise NotImplementedError("Not implemented")
 
 

@@ -60,7 +60,7 @@ target_version = ["py311"]
 [tool.ruff]
 exclude = [".venv", ".git", "__pycache__", "build", "dist", "venv"]
 ignore = []
-tab-size = 4
+indent-width = 4
 line-length = 90
 select = ["E", "F", "W", "I001"]
 src = ["src", "tests"]
