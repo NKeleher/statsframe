@@ -74,10 +74,14 @@ else:
     # TODO: these types are imported throughout gt, so we need to either put
     # those imports under TYPE_CHECKING, or continue to make available dynamically here.
     class DataFrameLike(ABC):
-        """Represent some DataFrame"""
+        """
+        Represent some DataFrame.
+        """
 
     class SeriesLike(ABC):
-        """Represent some Series"""
+        """
+        Represent some Series.
+        """
 
     DataFrameLike.register(PdDataFrame)
     DataFrameLike.register(PlDataFrame)
@@ -97,7 +101,9 @@ def _raise_not_implemented(data):
 # copy_data ----
 @singledispatch
 def copy_data(data: DataFrameLike) -> DataFrameLike:
-    """Copy the stored table data"""
+    """
+    Copy the stored table data.
+    """
     _raise_not_implemented(data)
 
 
@@ -114,7 +120,9 @@ def _(data: PlDataFrame):
 # get_column_names ----
 @singledispatch
 def get_column_names(data: DataFrameLike) -> List[str]:
-    """Get a list of column names from the input data table"""
+    """
+    Get a list of column names from the input data table.
+    """
     _raise_not_implemented(data)
 
 
@@ -133,7 +141,9 @@ def _(data: PlDataFrame):
 
 @singledispatch
 def n_rows(data: DataFrameLike) -> int:
-    """Get the number of rows from the input data table"""
+    """
+    Get the number of rows from the input data table.
+    """
     raise _raise_not_implemented(data)
 
 
@@ -148,7 +158,9 @@ def _(data):
 
 @singledispatch
 def _get_cell(data: DataFrameLike, row: int, column: str) -> Any:
-    """Get the content from a single cell in the input data table"""
+    """
+    Get the content from a single cell in the input data table.
+    """
 
     _raise_not_implemented(data)
 
@@ -194,7 +206,9 @@ def _(data, row: int, column: str, value: Any):
 
 @singledispatch
 def _get_column_dtype(data: DataFrameLike, column: str) -> str:
-    """Get the data type for a single column in the input data table"""
+    """
+    Get the data type for a single column in the input data table.
+    """
     return data[column].dtype
 
 
@@ -203,7 +217,9 @@ def _get_column_dtype(data: DataFrameLike, column: str) -> str:
 
 @singledispatch
 def reorder(data: DataFrameLike, rows: List[int], columns: List[str]) -> DataFrameLike:
-    """Return a re-ordered DataFrame."""
+    """
+    Return a re-ordered DataFrame.
+    """
     _raise_not_implemented(data)
 
 
@@ -262,7 +278,9 @@ _NamePos: TypeAlias = List[Tuple[str, int]]
 
 @singledispatch
 def eval_select(data: DataFrameLike, expr: SelectExpr, strict: bool = True) -> _NamePos:
-    """Return a list of column names selected by expr."""
+    """
+    Return a list of column names selected by expr.
+    """
 
     raise NotImplementedError(f"Unsupported type: {type(expr)}")
 
@@ -338,7 +356,9 @@ def _eval_select_from_list(
 
 @singledispatch
 def create_empty_frame(df: DataFrameLike) -> DataFrameLike:
-    """Return a DataFrame with the same shape, but all nan string columns"""
+    """
+    Return a DataFrame with the same shape, but all nan string columns.
+    """
     raise NotImplementedError(f"Unsupported type: {type(df)}")
 
 
@@ -358,7 +378,9 @@ def _(df: PlDataFrame):
 
 @singledispatch
 def copy_frame(df: DataFrameLike) -> DataFrameLike:
-    """Return a copy of the input DataFrame"""
+    """
+    Return a copy of the input DataFrame.
+    """
     raise NotImplementedError(f"Unsupported type: {type(df)}")
 
 
@@ -377,7 +399,9 @@ def _(df: PlDataFrame):
 
 @singledispatch
 def cast_frame_to_string(df: DataFrameLike) -> DataFrameLike:
-    """Return a copy of the input DataFrame with all columns cast to string"""
+    """
+    Return a copy of the input DataFrame with all columns cast to string.
+    """
     raise NotImplementedError(f"Unsupported type: {type(df)}")
 
 
@@ -398,7 +422,9 @@ def _(df: PlDataFrame):
 
 @singledispatch
 def replace_null_frame(df: DataFrameLike, replacement: DataFrameLike) -> DataFrameLike:
-    """Return a copy of the input DataFrame with all null values replaced with replacement"""
+    """
+    Return a copy of the input DataFrame with all null values replaced with replacement.
+    """
     raise NotImplementedError(f"Unsupported type: {type(df)}")
 
 
@@ -496,10 +522,11 @@ def _(df: PlDataFrame, x: Any) -> bool:
 
 @singledispatch
 def validate_frame(df: DataFrameLike) -> DataFrameLike:
-    """Raises an error if a DataFrame is not supported by Great Tables.
+    """
+    Raises an error if a DataFrame is not supported by Great Tables.
 
-    Note that this is only relevant for pandas, which allows duplicate names
-    on DataFrames, and multi-index columns (and probably other things).
+    Note that this is only relevant for pandas, which allows duplicate names on
+    DataFrames, and multi-index columns (and probably other things).
     """
     raise NotImplementedError(f"Unsupported type: {type(df)}")
 
