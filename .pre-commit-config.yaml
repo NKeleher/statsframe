@@ -4,6 +4,8 @@ ci:
 default_language_version:
   python: python3.12
 
+default_stages: [commit]
+
 repos:
   # general checks (see here: https://pre-commit.com/hooks.html)
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -11,9 +13,13 @@ repos:
     hooks:
       - id: check-yaml
         args: [--allow-multiple-documents]
+        stages: [commit, manual]
       - id: end-of-file-fixer
+        stages: [commit, manual]
       - id: trailing-whitespace
+        stages: [commit, manual]
       - id: check-added-large-files
+        stages: [commit, manual]
 
   # black - formatting
   - repo: https://github.com/psf/black
@@ -24,6 +30,7 @@ repos:
         args:
           - "--config"
           - "./pyproject.toml"
+        stages: [commit, manual]
 
   # ruff - linting
   - repo: https://github.com/astral-sh/ruff-pre-commit
@@ -31,6 +38,7 @@ repos:
     hooks:
       - id: ruff
         name: ruff
+        stages: [commit, manual]
 
   # mypy - lint-like type checking
   #  - repo: https://github.com/pre-commit/mirrors-mypy
@@ -58,6 +66,7 @@ repos:
             src,
             tests,
           ]
+        stages: [commit, manual]
 
   # bandit - find common security issues
   - repo: https://github.com/pycqa/bandit
@@ -69,6 +78,7 @@ repos:
         args:
           - -r
           - src
+        stages: [commit]
 
   - repo: local
     hooks:
@@ -78,6 +88,7 @@ repos:
         language: system
         types: [python]
         pass_filenames: false
+        stages: [commit]
 
   # prettier - formatting JS, CSS, JSON, Markdown, ...
   - repo: https://github.com/pre-commit/mirrors-prettier
@@ -85,3 +96,4 @@ repos:
     hooks:
       - id: prettier
         exclude: ^poetry.lock
+        stages: [commit, manual]
