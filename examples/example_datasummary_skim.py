@@ -2,7 +2,7 @@
 import pandas as pd
 import polars as pl
 
-import pydatasummary as ds
+import statsframe as ds
 
 # %%
 df = pl.read_csv(

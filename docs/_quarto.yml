@@ -3,7 +3,7 @@ project:
   type: website
   output-dir: .
 # website:
-#   title: "pydatasummary"
+#   title: "statsframe"
 #   favicon: favicon.ico
 #   twitter-card: true
 #   navbar:
@@ -27,12 +27,12 @@ project:
 #   - _sidebar.yml
 
 # quartodoc:
-#   package: pydatasummary
+#   package: statsframe
 #   parser: google
 #   sidebar: _sidebar.yml
 
 #   sections:
 #     - title: "Function reference"
-#       desc: "What pydatasummary's functions do"
+#       desc: "What statsframe's functions do"
 #       contents:
 #         - skim

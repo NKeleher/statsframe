@@ -7,11 +7,11 @@ install-dev:
 style:
 	poetry run pre-commit run --hook-stage manual --all-files
 
-pytest-cov:
-	poetry run pytest --cov-report term --cov=pydatasummary tests/
+pytest-cov: install-dev
+	poetry run pytest --cov-report term --cov=statsframe tests/
 
-build: pytest-cov
+build:
 	poetry build
 
-publish: build
+publish: style build
 	poetry publish
