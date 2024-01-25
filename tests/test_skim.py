@@ -1,7 +1,7 @@
 import polars as pl
 from polars.testing import assert_frame_equal
 
-from pydatasummary.ds import skim
+import statsframe as sf
 
 df = pl.DataFrame(
     {
@@ -28,7 +28,7 @@ expected_df = pl.DataFrame(
 
 def test_skim_numeric_df(data=df):
     # Act
-    result = skim(data)
+    result = sf.skim(data)
 
     # Assert
     assert_frame_equal(result, expected_df)
