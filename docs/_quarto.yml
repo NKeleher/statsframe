@@ -1,0 +1,38 @@
+# docs: https://quarto.org/docs/publishing/github-pages.html
+project:
+  type: website
+  output-dir: .
+# website:
+#   title: "pydatasummary"
+#   favicon: favicon.ico
+#   twitter-card: true
+#   navbar:
+#     left:
+#       - href: index.py
+#         text: Home
+#       - href: features.py]
+#         text: Features
+#       - text: "Reference"
+#         file: reference/index.qmd
+#       - contributing.qmd
+#       - code_of_conduct.qmd
+
+# format:
+#   html:
+#     theme: flatly
+#     css: styles.css
+#     toc: true
+
+# metadata-files:
+#   - _sidebar.yml
+
+# quartodoc:
+#   package: pydatasummary
+#   parser: google
+#   sidebar: _sidebar.yml
+
+#   sections:
+#     - title: "Function reference"
+#       desc: "What pydatasummary's functions do"
+#       contents:
+#         - skim
