@@ -2,14 +2,14 @@
 import pandas as pd
 import polars as pl
 
-import statsframe as ds
+import statsframe as sf
 
 # %%
 df = pl.read_csv(
     "https://vincentarelbundock.github.io/Rdatasets/csv/datasets/mtcars.csv"
 ).drop("rownames")
 
-stats = ds.skim(df)
+stats = sf.skim(df)
 
 # %% [markdown]
 # Import a csv file to a polars DataFrame:
@@ -26,7 +26,7 @@ penguins_df.glimpse()
 # Create a skim table
 
 # %%
-penguins_stats = ds.skim(penguins_df)
+penguins_stats = sf.skim(penguins_df)
 
 # %% [markdown]
 # Return the polars DataFrame with the summary statistics
@@ -35,7 +35,7 @@ penguins_stats = ds.skim(penguins_df)
 penguins_stats
 
 # %%
-ds.skim(
+sf.skim(
     penguins_df,
     output="markdown",
     title="Palmer's Penguins Summary Statistics",
@@ -43,7 +43,7 @@ ds.skim(
 )
 
 # %%
-ds.skim(
+sf.skim(
     penguins_df,
     stats="moments",
     output="markdown",
@@ -52,7 +52,7 @@ ds.skim(
 )
 
 # %%
-ds.skim(
+sf.skim(
     penguins_df,
     stats="full",
     output="markdown",
@@ -72,6 +72,6 @@ trees_df = pd.read_csv(
 trees_df.info()
 
 # %%
-trees_stats = ds.skim(trees_df)
+trees_stats = sf.skim(trees_df)
 
 # %%

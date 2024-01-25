@@ -29,14 +29,14 @@ modified using the [`Great Tables`](https://posit-dev.github.io/great-tables/ref
 
 ```python
 import polars as pl
-import statsframe as ds
+import statsframe as sf
 
 df = (
         pl.read_csv("https://vincentarelbundock.github.io/Rdatasets/csv/datasets/mtcars.csv")
           .drop("rownames")
     )
 
-stats = ds.skim(df)
+stats = sf.skim(df)
 
 Summary Statistics
 Rows: 32, Columns: 11
@@ -61,13 +61,13 @@ We can achieve the same result above with a pandas DataFrame.
 
 ```python
 import pandas as pd
-import statsframe as ds
+import statsframe as sf
 
 trees_df = pd.read_csv(
     "https://vincentarelbundock.github.io/Rdatasets/csv/datasets/trees.csv"
 ).drop(columns=["rownames"])
 
-trees_stats = ds.skim(trees_df)
+trees_stats = sf.skim(trees_df)
 
 Summary Statistics
 Rows: 31, Columns: 3

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "statsframe"
-version = "0.0.1"
+version = "0.0.2"
 description = "Customizable data and model summaries in Python."
 authors = ["Niall Keleher <niall.keleher@gmail.com>"]
 packages = [{ include = "*", from = "src" }]
