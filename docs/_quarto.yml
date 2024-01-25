@@ -2,6 +2,9 @@
 project:
   type: website
   output-dir: .
+
+execute:
+  freeze: auto
 # website:
 #   title: "statsframe"
 #   favicon: favicon.ico

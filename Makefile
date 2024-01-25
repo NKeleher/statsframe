@@ -13,5 +13,11 @@ pytest-cov: install-dev
 build:
 	poetry build
 
+# docs: https://python-poetry.org/docs/libraries#packaging
+# docs: https://python-poetry.org/docs/repositories/#configuring-credentials
 publish: style build
 	poetry publish
+
+
+publish-docs:
+	quarto publish gh-pages
