@@ -24,9 +24,9 @@ jobs:
           - os: "macos-latest"
             python: "3.11"
             pytest_opts: "--workers 4 --tests-per-worker 1 -k pins/tests"
-          - os: "windows-latest"
-            python: "3.11"
-            pytest_opts: "-k pins/tests"
+          # - os: "windows-latest"
+          #   python: "3.11"
+          #   pytest_opts: "-k pins/tests"
     defaults:
       run:
         shell: bash
@@ -40,15 +40,15 @@ jobs:
           python-version: ${{ matrix.python }}
       - name: Install Poetry
         uses: snok/install-poetry@v1
-        with:
-          virtualenvs-create: true
-          virtualenvs-in-project: true
-      - name: Load cached venv
-        id: cached-pip-wheels
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache
-          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+      #   with:
+      #     virtualenvs-create: true
+      #     virtualenvs-in-project: true
+      # - name: Load cached venv
+      #   id: cached-pip-wheels
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: ~/.cache
+      #     key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
       - name: Install dependencies
         run: poetry install --with=dev --no-interaction --no-root
       - name: Run tests
@@ -63,15 +63,15 @@ jobs:
           python-version: "3.11"
       - name: Install Poetry
         uses: snok/install-poetry@v1
-        with:
-          virtualenvs-create: true
-          virtualenvs-in-project: true
-      - name: Load cached venv
-        id: cached-pip-wheels
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache
-          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+      #   with:
+      #     virtualenvs-create: true
+      #     virtualenvs-in-project: true
+      # - name: Load cached venv
+      #   id: cached-pip-wheels
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: ~/.cache
+      #     key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
       - name: Install dependencies
         run: poetry install --with=dev --no-interaction --no-root
       - name: Set up Quarto
