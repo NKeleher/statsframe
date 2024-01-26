@@ -25,7 +25,8 @@ percentage missing, mean, standard deviation, minimum, median, and maximum.
 Where possible, `statsframe` will print a table to the console and return a
 polars DataFrame with the summary statistics. This allows for easy customization.
 For example, the `polars.DataFrame` with statistics from `statsframe` can be
-modified using the [`Great Tables`](https://posit-dev.github.io/great-tables/reference/) package.
+modified using the
+[`Great Tables`](https://posit-dev.github.io/great-tables/reference/) package.
 
 ```python
 import polars as pl

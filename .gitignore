@@ -170,8 +170,4 @@ cython_debug/
 .ruff_cache/
 
 # Makefile output
-.style
-.pytest-cov
-.build
-.publish
 .docs-build

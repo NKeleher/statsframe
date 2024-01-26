@@ -67,3 +67,7 @@ indent-width = 4
 line-length = 90
 select = ["E", "F", "W", "I001"]
 src = ["src", "tests"]
+
+[tool.codespell]
+skip = "*.lock"
+ignore-words-list = "ser"

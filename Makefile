@@ -16,32 +16,24 @@ install-dev: ## Install development dependencies
 	poetry config virtualenvs.in-project true
 	poetry install
 
-.style:
-	poetry run pre-commit run --hook-stage manual --all-files; touch .style
+style: ## Run pre-commit hooks that check code style
+	poetry run pre-commit run --hook-stage manual --all-files
 
-style: .style ## Run pre-commit hooks that check code style
 
-.pytest-cov: .style
+pytest-cov: ## Run pytest with coverage
 	poetry run pytest --cov-report term --cov=statsframe tests/
-	touch .pytest-cov
 
-pytest-cov: .pytest-cov ## Run pytest with coverage
-
-.build: .pytest-cov ## Build the package
+build: pytest-cov ## Build the package
 	poetry build
-	touch .build
-
-build: .build ## Build the package
 
 # docs: https://python-poetry.org/docs/libraries#packaging
 # docs: https://python-poetry.org/docs/repositories/#configuring-credentials
-.publish: .build
-	poetry publish
-
-publish: .publish ## Publish the package to PyPI
+publish: ## Publish the package to PyPI
+	poetry publish --build
 
 .docs-build:
 	poetry run quartodoc build --config docs/_quarto.yml
+	poetry run pre-commit
 	touch .docs-build
 
 docs-build: .docs-build ## Build the docs
