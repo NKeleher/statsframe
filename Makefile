@@ -13,8 +13,11 @@ pytest-cov: install-dev
 build:
 	poetry build
 
+# docs: https://python-poetry.org/docs/libraries#packaging
+# docs: https://python-poetry.org/docs/repositories/#configuring-credentials
 publish: style build
 	poetry publish
+
 
 docs-build:
 	poetry run quartodoc build --config docs/_quarto.yml
@@ -24,3 +27,5 @@ docs-watch:
 
 docs-preview:
 	quarto preview docs
+	
+

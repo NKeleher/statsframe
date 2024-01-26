@@ -1,6 +1,14 @@
 project:
   type: website
 
+
+
+
+
+
+
+
+
 metadata-files:
   - _sidebar.yml
 
