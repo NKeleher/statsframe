@@ -1,0 +1,9 @@
+website:
+  sidebar:
+    - contents:
+        - reference/index.qmd
+        - contents:
+            - reference/datasummary.skim.qmd
+          section: datasummary
+      id: reference
+    - id: dummy-sidebar

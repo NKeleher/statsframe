@@ -15,3 +15,12 @@ build:
 
 publish: style build
 	poetry publish
+
+docs-build:
+	poetry run quartodoc build --config docs/_quarto.yml
+
+docs-watch:
+	poetry run quartodoc build --watch --config docs/_quarto.yml
+
+docs-preview:
+	quarto preview docs
