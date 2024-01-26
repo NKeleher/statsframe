@@ -9,7 +9,7 @@ format:
     sidebar: true
 
 website:
-  title: "StatsFrame documentation"
+  title: "StatsFrame"
   description: "Customizable data and model summaries in Python."
   # favicon: logo.png
   page-navigation: false
@@ -32,10 +32,6 @@ website:
       - icon: github
         href: https://github.com/nkeleher/statsframe
         aria-label: statsframe
-
-theme:
-  light: flatly
-  dark: darkly
 
 quartodoc:
   style: pkgdown

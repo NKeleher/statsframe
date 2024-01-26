@@ -1,5 +1,5 @@
 ---
-title: Get started with statsframe
+title: Get started with StatsFrame
 jupyter: python3
 ---
 
