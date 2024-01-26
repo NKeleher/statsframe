@@ -1,41 +1,51 @@
-# docs: https://quarto.org/docs/publishing/github-pages.html
 project:
   type: website
-  output-dir: .
 
-execute:
-  freeze: auto
-# website:
-#   title: "statsframe"
-#   favicon: favicon.ico
-#   twitter-card: true
-#   navbar:
-#     left:
-#       - href: index.py
-#         text: Home
-#       - href: features.py]
-#         text: Features
-#       - text: "Reference"
-#         file: reference/index.qmd
-#       - contributing.qmd
-#       - code_of_conduct.qmd
+metadata-files:
+  - _sidebar.yml
 
-# format:
-#   html:
-#     theme: flatly
-#     css: styles.css
-#     toc: true
+format:
+  html:
+    sidebar: true
 
-# metadata-files:
-#   - _sidebar.yml
+website:
+  title: "StatsFrame documentation"
+  description: "Customizable data and model summaries in Python."
+  # favicon: logo.png
+  page-navigation: false
+  search:
+    location: sidebar
+    type: textbox
+    limit: 10
+  navbar:
+    background: "#D55E00"
+    foreground: "#000000"
+    pinned: true
+    search: true
+    #logo: logo.png
+    left:
+      - text: "Get started"
+        file: get_started.qmd
+      - text: "Reference"
+        file: reference/index.qmd
+    right:
+      - icon: github
+        href: https://github.com/nkeleher/statsframe
+        aria-label: statsframe
 
-# quartodoc:
-#   package: statsframe
-#   parser: google
-#   sidebar: _sidebar.yml
+theme:
+  light: flatly
+  dark: darkly
 
-#   sections:
-#     - title: "Function reference"
-#       desc: "What statsframe's functions do"
-#       contents:
-#         - skim
+quartodoc:
+  style: pkgdown
+  dir: reference
+  package: statsframe
+  sidebar: _sidebar.yml
+  parser: numpy
+
+  sections:
+    - title: datasummary
+      desc: Customizable data and model summaries in Python.
+      contents:
+        - datasummary.skim

@@ -71,6 +71,13 @@ instance/
 # Sphinx documentation
 docs/_build/
 
+# Quarto
+/.quarto/
+_site/
+objects.json
+reference/
+docs/*.ipynb
+
 # PyBuilder
 .pybuilder/
 target/
@@ -159,8 +166,5 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
+# Ruff
 .ruff_cache/
-
-# quarto
-/.quarto/
-/_site/
