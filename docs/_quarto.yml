@@ -9,7 +9,7 @@ format:
     sidebar: true
 
 website:
-  title: "statsframe"
+  title: "StatsFrame documentation"
   description: "Customizable data and model summaries in Python."
   # favicon: logo.png
   page-navigation: false

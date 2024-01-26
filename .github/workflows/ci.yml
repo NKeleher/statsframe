@@ -1,9 +1,12 @@
-name: CI
+name: ci
 
 on:
   push:
-    tags:
-      - "*.*.*"
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   tests:
@@ -30,14 +33,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
-      - name: Install Poetry
-        run: curl -sSL https://install.python-poetry.org | python3 -
-      - name: Add Poetry to path
-        run: echo "${HOME}/.poetry/bin" >> $GITHUB_PATH
+      - uses: snok/install-poetry@v1
       - name: Install dependencies
         run: poetry install --with=dev
       - name: Run tests
-        run: poetry run pytest
+        run: poetry run pytest tests/
   build-docs:
     name: "Build Docs"
     runs-on: ubuntu-latest
