@@ -32,7 +32,11 @@ publish: ## Publish the package to PyPI
 	poetry publish --build
 
 docs-build:  ## Build the docs
-	poetry run quartodoc build --config docs/_quarto.yml
+	cd docs && poetry run quartodoc build --verbose
+	cd docs && poetry run quarto render
+
+docs-clean:
+	rm -rf docs/_build docs/api/api_card
 
 docs-watch:	## Build the docs and watch for changes
 	poetry run quartodoc build --watch --config docs/_quarto.yml
