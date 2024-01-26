@@ -63,6 +63,10 @@ jobs:
   publish-docs:
     name: "Publish Docs"
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
     needs: ["build-docs", "tests"]
     if: github.ref == 'refs/heads/main'
     steps:
