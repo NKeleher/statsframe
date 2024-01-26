@@ -33,11 +33,13 @@ pandas = "^2.1.4"
 importlib-metadata = "^7.0.1"
 pyarrow = "^15.0.0"
 
-[tool.poetry.group.dev.dependencies]
+[tool.poetry.group.test.dependencies]
 pytest = "^7.4.4"
+pytest-cov = "^4.1.0"
+
+[tool.poetry.group.dev.dependencies]
 pre-commit = "^3.6.0"
 ruff = "^0.1.13"
-pytest-cov = "^4.1.0"
 black = "^23.12.1"
 bandit = "^1.7.6"
 docformatter = "^1.7.5"
@@ -45,7 +47,6 @@ mypy = "^1.8.0"
 jupyterlab = "^4.0.11"
 quartodoc = "^0.7.2"
 jupytext = "^1.16.1"
-
 
 [build-system]
 requires = ["poetry-core"]
@@ -66,3 +67,7 @@ indent-width = 4
 line-length = 90
 select = ["E", "F", "W", "I001"]
 src = ["src", "tests"]
+
+[tool.codespell]
+skip = "*.lock"
+ignore-words-list = "ser"

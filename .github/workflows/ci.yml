@@ -21,13 +21,13 @@ jobs:
         pytest_opts: ["--workers 4 --tests-per-worker 1"]
         include:
           - os: "ubuntu-latest"
-            python: "3.11"
+            python: "3.12"
           - os: "macos-latest"
-            python: "3.11"
-            pytest_opts: "--workers 4 --tests-per-worker 1 -k pins/tests"
+            python: "3.12"
+            pytest_opts: "--workers 4 --tests-per-worker 1 -k statsframe/tests"
           # - os: "windows-latest"
           #   python: "3.11"
-          #   pytest_opts: "-k pins/tests"
+          #   pytest_opts: "-k statsframe/tests"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -35,23 +35,21 @@ jobs:
           python-version: ${{ matrix.python }}
       - uses: snok/install-poetry@v1
       - name: Install dependencies
-        run: poetry install --with=dev
+        run: poetry install --with=test,dev
       - name: Run tests
         run: poetry run pytest tests/
   build-docs:
     name: "Build Docs"
     runs-on: ubuntu-latest
+    needs: ["tests"]
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
-      - name: Install Poetry
-        run: curl -sSL https://install.python-poetry.org | python3 -
-      - name: Add Poetry to path
-        run: echo "${HOME}/.poetry/bin" >> $GITHUB_PATH
+          python-version: "3.12"
+      - uses: snok/install-poetry@v1
       - name: Install dependencies
-        run: poetry install --with=dev
+        run: poetry install --with=test,dev
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
       - name: Build docs

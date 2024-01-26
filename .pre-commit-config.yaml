@@ -11,14 +11,41 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.5.0
     hooks:
+      - id: check-merge-conflict
+        stages: [commit]
       - id: check-yaml
         args: [--allow-multiple-documents]
+        stages: [commit, manual]
+      - id: check-toml
         stages: [commit, manual]
       - id: end-of-file-fixer
         stages: [commit, manual]
       - id: trailing-whitespace
         stages: [commit, manual]
       - id: check-added-large-files
+        stages: [commit, manual]
+      - id: check-ast
+        stages: [commit, manual]
+      - id: name-tests-test
+        args: ["--pytest-test-first"]
+        stages: [commit]
+
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    rev: 0.27.3
+    hooks:
+      - id: check-github-actions
+        args: ["--verbose"]
+        stages: [commit, manual]
+      - id: check-github-workflows
+        args: ["--verbose"]
+        stages: [commit, manual]
+
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.2.4
+    hooks:
+      - id: codespell
+        additional_dependencies:
+          - tomli
         stages: [commit, manual]
 
   # black - formatting
@@ -68,6 +95,24 @@ repos:
           ]
         stages: [commit, manual]
 
+  # prettier - formatting JS, CSS, JSON, Markdown, ...
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v4.0.0-alpha.8
+    hooks:
+      - id: prettier
+        exclude: ^poetry.lock
+        types_or: [css, javascript, yaml]
+        stages: [commit, manual]
+
+  - repo: https://github.com/DavidAnson/markdownlint-cli2
+    rev: v0.12.1
+    hooks:
+      - id: markdownlint-cli2
+        entry: markdownlint-cli2
+        language: node
+        types: [markdown]
+        stages: [commit, manual]
+
   # bandit - find common security issues
   - repo: https://github.com/pycqa/bandit
     rev: 1.7.7
@@ -89,11 +134,3 @@ repos:
         types: [python]
         pass_filenames: false
         stages: [commit]
-
-  # prettier - formatting JS, CSS, JSON, Markdown, ...
-  - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v4.0.0-alpha.8
-    hooks:
-      - id: prettier
-        exclude: ^poetry.lock
-        stages: [commit, manual]
