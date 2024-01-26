@@ -34,7 +34,6 @@ publish: ## Publish the package to PyPI
 docs-build:  ## Build the docs
 	poetry run quartodoc build --config docs/_quarto.yml
 	poetry run pre-commit
-	touch .docs-build
 
 docs-watch:	## Build the docs and watch for changes
 	poetry run quartodoc build --watch --config docs/_quarto.yml
