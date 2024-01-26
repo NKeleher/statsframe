@@ -31,15 +31,13 @@ build: pytest-cov ## Build the package
 publish: ## Publish the package to PyPI
 	poetry publish --build
 
-.docs-build:
+docs-build:  ## Build the docs
 	poetry run quartodoc build --config docs/_quarto.yml
 	poetry run pre-commit
 	touch .docs-build
 
-docs-build: .docs-build ## Build the docs
-
 docs-watch:	## Build the docs and watch for changes
 	poetry run quartodoc build --watch --config docs/_quarto.yml
 
-docs-preview: .docs-build ## Preview the docs
+docs-preview: docs-build ## Preview the docs
 	quarto preview docs
