@@ -27,5 +27,4 @@ docs-watch:
 
 docs-preview:
 	quarto preview docs
-	
 
