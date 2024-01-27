@@ -1,6 +1,12 @@
 # statsframe
 
-Customizable data and model summaries in Python.
+![PyPI - Version](https://img.shields.io/pypi/v/statsframe.svg) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/statsframe)
+[![License](https://img.shields.io/github/license/NKeleher/statsframe)](https://img.shields.io/github/license/NKeleher/statsframe)
+[![Repo Status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+
+---
+
+**Customizable data and model summaries in Python.**
 
 `statsframe` creates tables that provide descriptive statistics of
 numeric and categorical data.
