@@ -41,5 +41,5 @@ docs-clean:
 docs-watch:	## Build the docs and watch for changes
 	poetry run quartodoc build --watch --config docs/_quarto.yml
 
-docs-preview: docs-build ## Preview the docs
+docs-preview: ## Preview the docs
 	quarto preview docs
