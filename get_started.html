@@ -184,13 +184,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Where possible, <code>statsframe</code> will print a table to the console and return a polars DataFrame with the summary statistics. This allows for easy customization. For example, the <code>polars.DataFrame</code> with statistics from <code>statsframe</code> can be modified using the <a href="https://posit-dev.github.io/great-tables/reference/"><code>Great Tables</code></a> package.</p>
 <div id="mtcars-skim" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsframe <span class="im">as</span> sf</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>file_path <span class="op">=</span> <span class="st">"https://vincentarelbundock.github.io/Rdatasets/csv/datasets/"</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pl.read_csv(<span class="ss">f"</span><span class="sc">{</span>file_path<span class="sc">}</span><span class="ss">/mtcars.csv"</span>).drop(<span class="st">"rownames"</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>stats <span class="op">=</span> sf.skim(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsframe <span class="im">as</span> sf</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>file_path <span class="op">=</span> <span class="st">"https://vincentarelbundock.github.io/Rdatasets/csv/datasets/"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pl.read_csv(<span class="ss">f"</span><span class="sc">{</span>file_path<span class="sc">}</span><span class="ss">/mtcars.csv"</span>).drop(<span class="st">"rownames"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>stats <span class="op">=</span> sf.skim(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Summary Statistics
 Rows: 32, Columns: 11
@@ -211,12 +210,8 @@ Rows: 32, Columns: 11
 └──────┴────────────┴─────────────┴───────┴───────┴──────┴────────┴───────┘</code></pre>
 </div>
 </div>
-<div id="62566fc7" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>(</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    pl.read_csv(<span class="ss">f"</span><span class="sc">{</span>file_path<span class="sc">}</span><span class="ss">/mtcars.csv"</span>).drop(<span class="st">"rownames"</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    .drop(<span class="st">"rownames"</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    .pipe(sf.skim)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="c9814028" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>(pl.read_csv(<span class="ss">f"</span><span class="sc">{</span>file_path<span class="sc">}</span><span class="ss">/mtcars.csv"</span>).drop(<span class="st">"rownames"</span>).pipe(sf.skim))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Summary Statistics
 Rows: 32, Columns: 11
@@ -387,14 +382,11 @@ Rows: 32, Columns: 11
 <p>We can achieve the same result above with a pandas DataFrame.</p>
 <div id="trees-skim" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsframe <span class="im">as</span> sf</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>trees_df <span class="op">=</span> pd.read_csv(</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://vincentarelbundock.github.io/Rdatasets/csv/datasets/trees.csv"</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>).drop(columns<span class="op">=</span>[<span class="st">"rownames"</span>])</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>trees_stats <span class="op">=</span> sf.skim(trees_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsframe <span class="im">as</span> sf</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>trees_df <span class="op">=</span> pd.read_csv(<span class="ss">f"</span><span class="sc">{</span>file_path<span class="sc">}</span><span class="ss">/trees.csv"</span>).drop(columns<span class="op">=</span>[<span class="st">"rownames"</span>])</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>trees_stats <span class="op">=</span> sf.skim(trees_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Summary Statistics
 Rows: 31, Columns: 3
