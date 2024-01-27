@@ -1,7 +1,6 @@
 import polars as pl
-from polars.testing import assert_frame_equal
-
 import statsframe as sf
+from polars.testing import assert_frame_equal
 
 df = pl.DataFrame(
     {

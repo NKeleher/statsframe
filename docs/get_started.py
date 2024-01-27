@@ -37,20 +37,15 @@ modified using the
 # | label: mtcars-skim
 
 import polars as pl
-
 import statsframe as sf
 
-file_path = "https://vincentarelbundock.github.io/Rdatasets/csv/datasets/"
+file_path = "https://vincentarelbundock.github.io/Rdatasets/csv/datasets"
 df = pl.read_csv(f"{file_path}/mtcars.csv").drop("rownames")
 
 stats = sf.skim(df)
 
 # %%
-(
-    pl.read_csv(f"{file_path}/mtcars.csv").drop("rownames")
-    .drop("rownames")
-    .pipe(sf.skim)
-)
+(pl.read_csv(f"{file_path}/mtcars.csv").drop("rownames").drop("rownames").pipe(sf.skim))
 # %% [markdown]
 """
 We can achieve the same result above with a pandas DataFrame.
@@ -59,11 +54,8 @@ We can achieve the same result above with a pandas DataFrame.
 # %%
 # | label: trees-skim
 import pandas as pd
-
 import statsframe as sf
 
-trees_df = pd.read_csv(
-    "https://vincentarelbundock.github.io/Rdatasets/csv/datasets/trees.csv"
-).drop(columns=["rownames"])
+trees_df = pd.read_csv(f"{file_path}/trees.csv").drop(columns=["rownames"])
 
 trees_stats = sf.skim(trees_df)
