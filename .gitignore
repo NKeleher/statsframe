@@ -168,6 +168,3 @@ cython_debug/
 
 # Ruff
 .ruff_cache/
-
-# Makefile output
-.docs-build
