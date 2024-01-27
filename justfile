@@ -2,6 +2,8 @@
 default:
 	just --list --unsorted
 
+# Aliases
+alias dev := install-dev
 alias commit := git-commit
 alias push-up := git-push-upstream
 alias push := git-push
@@ -61,20 +63,20 @@ publish:
 
 # Build documentation and website
 docs-build:
-	cd docs && poetry run quartodoc build --verbose
+	poetry run quartodoc build --verbose --config docs/_quarto.yml
+
+# Render documentation and website
+render: docs-build
+	poetry run quarto render docs
 
 # Build the documentation and watch for changes
 docs-watch:
-	poetry run quartodoc build --watch --config docs/_quarto.yml
+	poetry run poetry run quartodoc build --watch --verbose --config docs/_quarto.yml
 
-# Render documentation and website
-docs-render: docs-build
-	cd docs && poetry run quarto render
+# Preview the docs
+preview:
+	poetry run quarto preview docs
 
 # Clean docs build
 docs-clean:
 	rm -rf docs/_build docs/api/api_card
-
-# Preview the docs
-docs-preview: docs-build
-	quarto preview docs
