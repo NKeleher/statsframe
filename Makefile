@@ -21,7 +21,7 @@ style: ## Run pre-commit hooks that check code style
 
 
 pytest-cov: ## Run pytest with coverage
-	poetry run pytest --cov-report term --cov=statsframe tests/
+	poetry run pytest --cov-report term --cov=statsframe
 
 build: pytest-cov ## Build the package
 	poetry build
@@ -41,5 +41,5 @@ docs-clean:
 docs-watch:	## Build the docs and watch for changes
 	poetry run quartodoc build --watch --config docs/_quarto.yml
 
-docs-preview: docs-build ## Preview the docs
+docs-preview: ## Preview the docs
 	quarto preview docs

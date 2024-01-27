@@ -1,16 +1,12 @@
----
-title: Get started with StatsFrame
-jupyter: python3
----
+# %% [markdown]
+# ---
+# title: Get started with StatsFrame
+# ---
 
-```{python}
-#| include: false
-import polars as pl
-```
-
-
-`statsframe` creates tables that provide descriptive statistics of
-numeric and categorical data.
+# %% [markdown]
+"""
+`statsframe` creates tables that provide descriptive statistics of numeric and
+categorical data.
 
 The goal is to provide a simple -- yet customizable -- way to summarize
 data and models in Python.
@@ -32,24 +28,38 @@ percentage missing, mean, standard deviation, minimum, median, and maximum.
 Where possible, `statsframe` will print a table to the console and return a
 polars DataFrame with the summary statistics. This allows for easy customization.
 For example, the `polars.DataFrame` with statistics from `statsframe` can be
-modified using the [`Great Tables`](https://posit-dev.github.io/great-tables/reference/) package.
+modified using the
+[`Great Tables`](https://posit-dev.github.io/great-tables/reference/) package.
 
-```{python}
+"""
+
+# %%
+# | label: mtcars-skim
+
 import polars as pl
+
 import statsframe as sf
 
-df = (
-        pl.read_csv("https://vincentarelbundock.github.io/Rdatasets/csv/datasets/mtcars.csv")
-          .drop("rownames")
-    )
+file_path = "https://vincentarelbundock.github.io/Rdatasets/csv/datasets/"
+df = pl.read_csv(f"{file_path}/mtcars.csv").drop("rownames")
 
 stats = sf.skim(df)
-```
 
+# %%
+(
+    pl.read_csv(f"{file_path}/mtcars.csv").drop("rownames")
+    .drop("rownames")
+    .pipe(sf.skim)
+)
+# %% [markdown]
+"""
 We can achieve the same result above with a pandas DataFrame.
+"""
 
-```{python}
+# %%
+# | label: trees-skim
 import pandas as pd
+
 import statsframe as sf
 
 trees_df = pd.read_csv(
@@ -57,4 +67,3 @@ trees_df = pd.read_csv(
 ).drop(columns=["rownames"])
 
 trees_stats = sf.skim(trees_df)
-```

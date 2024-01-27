@@ -48,18 +48,7 @@ repos:
           - tomli
         stages: [commit, manual]
 
-  # black - formatting
-  - repo: https://github.com/psf/black
-    rev: 23.12.1
-    hooks:
-      - id: black
-        name: black
-        args:
-          - "--config"
-          - "./pyproject.toml"
-        stages: [commit, manual]
-
-  # ruff - linting
+  # ruff - linting and formatting
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: "v0.1.14"
     hooks:
@@ -80,19 +69,9 @@ repos:
     hooks:
       - id: docformatter
         name: docformatter
-        args:
-          [
-            -r,
-            -i,
-            --pre-summary-newline,
-            --make-summary-multi-line,
-            --wrap-summaries,
-            "90",
-            --wrap-descriptions,
-            "90",
-            src,
-            tests,
-          ]
+        args: [--in-place]
+        additional_dependencies: [tomli]
+        files: (^src/|^tests/|^docs/)
         stages: [commit, manual]
 
   # prettier - formatting JS, CSS, JSON, Markdown, ...
@@ -101,16 +80,7 @@ repos:
     hooks:
       - id: prettier
         exclude: ^poetry.lock
-        types_or: [css, javascript, yaml]
-        stages: [commit, manual]
-
-  - repo: https://github.com/DavidAnson/markdownlint-cli2
-    rev: v0.12.1
-    hooks:
-      - id: markdownlint-cli2
-        entry: markdownlint-cli2
-        language: node
-        types: [markdown]
+        types_or: [css, javascript, markdown, yaml, json]
         stages: [commit, manual]
 
   # bandit - find common security issues

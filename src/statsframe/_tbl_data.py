@@ -446,7 +446,8 @@ def _(df: PlDataFrame):
 @singledispatch
 def replace_null_frame(df: DataFrameLike, replacement: DataFrameLike) -> DataFrameLike:
     """
-    Return a copy of the input DataFrame with all null values replaced with replacement.
+    Return a copy of the input DataFrame with all null values replaced with
+    replacement.
     """
     raise NotImplementedError(f"Unsupported type: {type(df)}")
 
@@ -548,8 +549,10 @@ def validate_frame(df: DataFrameLike) -> DataFrameLike:
     """
     Raises an error if a DataFrame is not supported by Great Tables.
 
-    Note that this is only relevant for pandas, which allows duplicate names on
-    DataFrames, and multi-index columns (and probably other things).
+    Note that this is only relevant for pandas, which allows duplicate
+    names on DataFrames, and multi-index columns (and probably other
+    things).
+
     """
     raise NotImplementedError(f"Unsupported type: {type(df)}")
 

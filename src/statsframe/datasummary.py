@@ -57,6 +57,7 @@ def skim(
 
         # Generate summary statistics in markdown format
         summary = skim(data, output="markdown")
+
     """
 
     # methods depend on the data being a polars DataFrame
@@ -116,6 +117,7 @@ def _skim_numeric(data: pl.DataFrame, stats: str = "simple") -> pl.DataFrame:
 
     Returns:
         pl.DataFrame: The summary statistics table.
+
     """
     stats_dict = {
         "simple": ["Missing (%)", "Mean", "SD", "Min", "Median", "Max"],
@@ -204,6 +206,7 @@ def _skim_categorical(data: pl.DataFrame, stats: str = "simple") -> pl.DataFrame
 
     Returns:
         pl.DataFrame: The summary statistics table.
+
     """
     raise NotImplementedError("Not implemented")
 
@@ -221,6 +224,7 @@ def convert_to_pl_df(data: DataFrameLike) -> pl.DataFrame:
 
     Raises:
         ValueError: If the input data is not a polars or pandas DataFrame.
+
     """
     if isinstance(data, pl.DataFrame):
         return data
