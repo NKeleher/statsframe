@@ -2,7 +2,12 @@
 default:
 	just --list --unsorted
 
+alias commit := git-commit
+alias push-up := git-push-upstream
+alias push := git-push
+
 # Clean environment
+[confirm]
 clean:
 	rm -rf .venv/
 
@@ -15,13 +20,34 @@ install-dev:
 	poetry config virtualenvs.in-project true
 	poetry install
 
+# Install pre-commit hooks
+install-hooks:
+	poetry run pre-commit install --install-hooks
+
 # Run pre-commit hooks that check code style
-style:
+style: install-hooks
 	poetry run pre-commit run --hook-stage manual --all-files
 
 # Run pytest with coverage
 pytest-cov:
-	poetry run pytest --cov-report term --cov=statsframe tests/
+	poetry run pytest --cov-report term --cov=statsframe
+
+# Git add file
+[no-cd]
+git-add file:
+	poetry run git add {{file}}
+
+# Git commit with message
+git-commit m:
+	poetry run git commit --no-verify -m "{{m}}"
+
+# Git push upstream to origin
+git-push-upstream b:
+	poetry run git push --set-upstream origin {{b}}
+
+# Git push
+git-push:
+	poetry run git push
 
 # Build the package
 build: pytest-cov

@@ -47,6 +47,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - uses: extractions/setup-just@v1
       - uses: snok/install-poetry@v1
       - name: Install dependencies
         run: poetry install --with=test,dev
@@ -54,7 +55,7 @@ jobs:
         uses: quarto-dev/quarto-actions/setup@v2
       - name: Build docs
         run: |
-          make docs-build
+          just docs-render
       - name: Save docs artifact
         uses: actions/upload-artifact@v4
         with:
