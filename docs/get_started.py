@@ -5,8 +5,8 @@
 
 # %% [markdown]
 """
-`statsframe` creates tables that provide descriptive statistics of numeric and categorical
-data.
+`statsframe` creates tables that provide descriptive statistics of numeric and
+categorical data.
 
 The goal is to provide a simple -- yet customizable -- way to summarize
 data and models in Python.
@@ -30,6 +30,7 @@ polars DataFrame with the summary statistics. This allows for easy customization
 For example, the `polars.DataFrame` with statistics from `statsframe` can be
 modified using the
 [`Great Tables`](https://posit-dev.github.io/great-tables/reference/) package.
+
 """
 
 # %%
