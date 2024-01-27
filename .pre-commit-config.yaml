@@ -71,7 +71,7 @@ repos:
         name: docformatter
         args: [--in-place]
         additional_dependencies: [tomli]
-        files: (^src/|^tests/^docs/)
+        files: (^src/|^tests/|^docs/)
         stages: [commit, manual]
 
   # prettier - formatting JS, CSS, JSON, Markdown, ...
