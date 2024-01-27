@@ -56,17 +56,25 @@ build-backend = "poetry.core.masonry.api"
 addopts = ["-vvv"]
 testpaths = ["tests"]
 
-[tool.black]
-line_length = 90
-target_version = ["py311"]
-
+# docs: https://docs.astral.sh/ruff/configuration/
 [tool.ruff]
-exclude = [".venv", ".git", "__pycache__", "build", "dist", "venv"]
+extend-exclude = []
+extend-include = ["*.ipynb"]
 ignore = ["E402"]
 indent-width = 4
 line-length = 90
 select = ["E", "F", "W", "I001"]
 src = ["src", "tests"]
+
+# docs: https://docformatter.readthedocs.io/en/latest/usage.html
+[tool.docformatter]
+style = "sphinx"
+recursive = true
+pre-summary-newline = true
+make-summary-multi-line = true
+wrap-descriptions = 72
+wrap-summaries = 79
+blank = true
 
 [tool.codespell]
 skip = "*.lock"

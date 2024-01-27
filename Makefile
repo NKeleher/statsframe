@@ -21,7 +21,7 @@ style: ## Run pre-commit hooks that check code style
 
 
 pytest-cov: ## Run pytest with coverage
-	poetry run pytest --cov-report term --cov=statsframe tests/
+	poetry run pytest --cov-report term --cov=statsframe
 
 build: pytest-cov ## Build the package
 	poetry build

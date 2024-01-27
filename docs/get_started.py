@@ -39,12 +39,17 @@ import polars as pl
 
 import statsframe as sf
 
-df = pl.read_csv(
-    "https://vincentarelbundock.github.io/Rdatasets/csv/datasets/mtcars.csv"
-).drop("rownames")
+file_path = "https://vincentarelbundock.github.io/Rdatasets/csv/datasets/"
+df = pl.read_csv(f"{file_path}/mtcars.csv").drop("rownames")
 
 stats = sf.skim(df)
 
+# %%
+(
+    pl.read_csv(f"{file_path}/mtcars.csv").drop("rownames")
+    .drop("rownames")
+    .pipe(sf.skim)
+)
 # %% [markdown]
 """
 We can achieve the same result above with a pandas DataFrame.
