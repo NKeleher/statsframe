@@ -11,7 +11,7 @@ format:
 website:
   title: "StatsFrame"
   description: "Customizable data and model summaries in Python."
-  # favicon: logo.png
+  favicon: "favicon.ico"
   page-navigation: false
   search:
     location: sidebar
@@ -22,7 +22,7 @@ website:
     foreground: "#000000"
     pinned: true
     search: true
-    #logo: logo.png
+    logo: logo.png
     left:
       - text: "Get started"
         file: get_started.qmd
