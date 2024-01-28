@@ -45,7 +45,7 @@ df = pl.read_csv(f"{file_path}/mtcars.csv").drop("rownames")
 stats = sf.skim(df)
 
 # %%
-(pl.read_csv(f"{file_path}/mtcars.csv").drop("rownames").pipe(sf.skim))
+(df.pipe(sf.skim, output="simple"))
 # %% [markdown]
 """
 We can achieve the same result above with a pandas DataFrame.
@@ -59,3 +59,21 @@ import statsframe as sf
 trees_df = pd.read_csv(f"{file_path}/trees.csv").drop(columns=["rownames"])
 
 trees_stats = sf.skim(trees_df)
+
+
+# %%
+import numpy as np
+
+# %%
+corr = df.corr()
+
+# %%
+lower_triangle = np.tril(corr)
+
+# %%
+corr_lower = pl.DataFrame(lower_triangle, schema=corr.columns)
+
+# %%
+corr_lower.with_columns(pl.col(pl.Float64).replace(0.0, None))
+
+# %%
