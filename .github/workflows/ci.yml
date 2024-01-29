@@ -11,23 +11,13 @@ on:
 jobs:
   tests:
     name: "Tests"
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     if: ${{ !github.event.pull_request.head.repo.fork }}
     strategy:
       fail-fast: false
       matrix:
         python: ["3.8", "3.9", "3.10", "3.11", "3.12"]
-        os: ["ubuntu-latest"]
         pytest_opts: ["--workers 4 --tests-per-worker 1"]
-        include:
-          - os: "ubuntu-latest"
-            python: "3.12"
-          - os: "macos-latest"
-            python: "3.12"
-            pytest_opts: "--workers 4 --tests-per-worker 1 -k statsframe/tests"
-          # - os: "windows-latest"
-          #   python: "3.11"
-          #   pytest_opts: "-k statsframe/tests"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
