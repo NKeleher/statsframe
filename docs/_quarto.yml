@@ -6,10 +6,11 @@ metadata-files:
 
 format:
   html:
+    theme: journal
     sidebar: true
 
 website:
-  title: "StatsFrame"
+  title: "statsframe"
   description: "Customizable data and model summaries in Python."
   favicon: "favicon.ico"
   page-navigation: false
@@ -18,11 +19,9 @@ website:
     type: textbox
     limit: 10
   navbar:
-    background: "#D55E00"
-    foreground: "#000000"
     pinned: true
     search: true
-    logo: logo.png
+    # logo: logo.png
     left:
       - text: "Get started"
         file: get_started.py
@@ -38,10 +37,10 @@ quartodoc:
   dir: reference
   package: statsframe
   sidebar: _sidebar.yml
-  parser: numpy
+  parser: sphinx
 
   sections:
     - title: datasummary
       desc: Customizable data and model summaries in Python.
       contents:
-        - datasummary.skim
+        - datasummary.skim_frame

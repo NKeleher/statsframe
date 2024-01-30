@@ -27,7 +27,7 @@ expected_df = pl.DataFrame(
 
 def test_skim_numeric_df(data=df):
     # Act
-    result = sf.skim(data)
+    result = sf.skim_frame(data)
 
     # Assert
     assert_frame_equal(result, expected_df)

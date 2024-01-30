@@ -27,11 +27,12 @@ classifiers = [
 
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = ">=3.9,<3.13"
 polars = "^0.20.5"
 pandas = "^2.1.4"
-importlib-metadata = "^7.0.1"
 pyarrow = "^15.0.0"
+great-tables = "^0.2.0"
+importlib-metadata = "^7.0.1"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.4.4"
