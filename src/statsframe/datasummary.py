@@ -47,6 +47,7 @@ def correlation_frame(
 
     Raises:
         ValueError: If an unsupported method or output format is specified.
+
     """
     ...
 
