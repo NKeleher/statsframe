@@ -4,13 +4,126 @@ from __future__ import annotations
 import pandas as pd
 import polars as pl
 import polars.selectors as cs
+from great_tables import GT
 
 from ._tbl_data import DataFrameLike  # , SeriesLike
 
 cat_cols = []
 
 
-def skim(
+def correlation_frame(
+    data: DataFrameLike,
+    method: str = "pearson",
+    output: str = "polars",
+    float_precision: int = 2,
+    title: str = "Correlation Matrix",
+    notes: str = None,
+    align: str = "r",
+    color_palette: str = None,
+    na_color: str = None,
+):
+    """
+    Generates a correlation matrix based on the given data.
+
+    Args:
+        data: The input data to compute the correlation matrix on.
+        method: The method used to compute the correlation matrix.
+        Supported methods are "pearson", "kendall", and "spearman".
+        output: The output format of the correlation matrix.
+        Supported formats are "polars", "markdown", "simple", and "gt".
+        float_precision: The number of decimal places to round the correlation
+        values to.
+        title: The title of the correlation matrix.
+        notes: Additional notes or comments to include in the correlation matrix.
+        align: The alignment of the table cells.
+        Supported alignments are "r" (right), "l" (left), and "c" (center).
+        color_palette: The color palette to use for formatting the correlation
+        matrix when output is "gt".
+        na_color: The color to use for representing missing values in the
+        correlation matrix when output is "gt".
+
+    Returns:
+        The correlation matrix as a DataFrameLike object.
+
+    Raises:
+        ValueError: If an unsupported method or output format is specified.
+
+    """
+    ...
+
+    data = convert_to_polars(data).select(cs.numeric())
+    if method == "pearson":
+        corr_tab = data.corr()
+        var_list = corr_tab.columns
+        corr_tab = corr_tab.with_columns(var=pl.Series(corr_tab.columns)).select(
+            ["var"] + var_list
+        )
+    elif method == "kendall":
+        corr_tab, var_list = _use_pandas_corr(data, "kendall")
+    elif method == "spearman":
+        corr_tab, var_list = _use_pandas_corr(data, "spearman")
+    else:
+        raise ValueError("Supported methods are pearson, spearman, kendall correlation")
+
+    align_dict = {"r": "RIGHT", "l": "LEFT", "c": "CENTER"}
+    tbl_align = align_dict[align]
+
+    if output in {"polars", "markdown", "simple"}:
+        format_dict = {"polars": None, "markdown": "ASCII_MARKDOWN", "simple": "NOTHING"}
+        tbl_formatting = format_dict[output]
+        shape_details = f"Rows: {data.height}, Columns: {data.width}"
+
+        with pl.Config(
+            float_precision=float_precision,
+            tbl_formatting=tbl_formatting,
+            tbl_cell_alignment=tbl_align,
+            tbl_hide_column_names=False,
+            tbl_hide_column_data_types=True,
+            tbl_hide_dataframe_shape=True,
+        ):
+            print(f"{title}")
+            print(f"{shape_details}")
+            print(corr_tab)
+    elif output == "gt":
+        if color_palette is None:
+            color_palette = [
+                "#636363",
+                "#bdbdbd",
+                "#f0f0f0",
+                "#ffffff",
+                "#f0f0f0",
+                "#bdbdbd",
+                "#636363",
+            ]
+        if na_color is None:
+            na_color = "#ffffff"
+
+        (
+            GT(corr_tab)
+            .data_color(
+                domain=[-1, 1],
+                palette=color_palette,
+                na_color=na_color,
+            )
+            .fmt_number(columns=var_list, decimals=float_precision)
+            .cols_align(align=tbl_align.lower())
+            .tab_header(title=title)
+            .tab_source_note(source_note=f"{notes}")
+        )
+    else:
+        raise ValueError("Supported outputs are polars, markdown, simple, and gt")
+
+    return corr_tab
+
+
+def _use_pandas_corr(data, method):
+    result = data.to_pandas().corr(method=method).pipe(pl.from_pandas)
+    var_list = result.columns
+    result = result.with_columns(var=pl.Series(result.columns)).select(["var"] + var_list)
+    return result, var_list
+
+
+def skim_frame(
     data: pl.DataFrame,
     type: str = "numeric",
     stats: str = "simple",
@@ -50,18 +163,18 @@ def skim(
 
     Examples:
         # Generate summary statistics for a numeric DataFrame
-        summary = skim(data)
+        summary = skim_frame(data)
 
         # Generate summary statistics for a categorical DataFrame
-        summary = skim(data, type="categorical")
+        summary = skim_frame(data, type="categorical")
 
         # Generate summary statistics in markdown format
-        summary = skim(data, output="markdown")
+        summary = skim_frame(data, output="markdown")
 
     """
 
     # methods depend on the data being a polars DataFrame
-    data = convert_to_pl_df(data)
+    data = convert_to_polars(data)
 
     # check if the data is numeric or categorical
     if type == "numeric":
@@ -71,39 +184,39 @@ def skim(
     else:
         raise ValueError("Invalid type argument")
 
-    # format the output
-    output_dict = {
-        "polars": None,
-        "markdown": "ASCII_MARKDOWN",
-        "simple": "NOTHING",
-    }
-    tbl_formatting = output_dict[output]
-
-    if output == "polars":
-        tbl_formatting = None
-    elif output == "markdown":
-        tbl_formatting = "ASCII_MARKDOWN"
-    elif output == "simple":
-        tbl_formatting = "NOTHING"
-    else:
-        raise ValueError("Invalid output argument")
-
-    # details for the table formatting
     align_dict = {"r": "RIGHT", "l": "LEFT", "c": "CENTER"}
     tbl_align = align_dict[align]
-    shape_details = f"Rows: {data.height}, Columns: {data.width}"
 
-    with pl.Config(
-        float_precision=float_precision,
-        tbl_formatting=tbl_formatting,
-        tbl_cell_alignment=tbl_align,
-        tbl_hide_column_names=False,
-        tbl_hide_column_data_types=True,
-        tbl_hide_dataframe_shape=True,
-    ):
-        print(f"{title}")
-        print(f"{shape_details}")
-        print(stats_tab)
+    if output in {"polars", "markdown", "simple"}:
+        format_dict = {"polars": None, "markdown": "ASCII_MARKDOWN", "simple": "NOTHING"}
+        tbl_formatting = format_dict[output]
+        shape_details = f"Rows: {data.height}, Columns: {data.width}"
+
+        with pl.Config(
+            float_precision=float_precision,
+            tbl_formatting=tbl_formatting,
+            tbl_cell_alignment=tbl_align,
+            tbl_hide_column_names=False,
+            tbl_hide_column_data_types=True,
+            tbl_hide_dataframe_shape=True,
+        ):
+            print(f"{title}")
+            print(f"{shape_details}")
+            print(stats_tab)
+    elif output == "gt":
+        (
+            GT(stats_tab)
+            .fmt_number(columns=float_cols, decimals=float_precision)
+            .cols_align(align=tbl_align.lower())
+            .tab_header(
+                title=title,
+                subtitle=f"Rows: {data.height}, Columns: {data.width}",
+            )
+            .tab_source_note(source_note=f"{notes}")
+        )
+    else:
+        raise ValueError("Supported outputs are polars, markdown, simple, and gt")
+
     return stats_tab
 
 
@@ -211,7 +324,7 @@ def _skim_categorical(data: pl.DataFrame, stats: str = "simple") -> pl.DataFrame
     raise NotImplementedError("Not implemented")
 
 
-def convert_to_pl_df(data: DataFrameLike) -> pl.DataFrame:
+def convert_to_polars(data: DataFrameLike) -> pl.DataFrame:
     """
     Converts a DataFrame-like object to a polars DataFrame.
 

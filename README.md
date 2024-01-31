@@ -23,9 +23,9 @@ library to produce tables that can be easily customized and exported to other fo
 
 ## Basic Usage
 
-As an example of `statsframe` usage, the `skim` function provides a
+As an example of `statsframe` usage, the `skim_frame` function provides a
 summary of a DataFrame (either `polars.DataFrame` or `pandas.DataFrame`).
-The default summary statistics returned by `statsframe.skim()` are unique values,
+The default summary statistics returned by `statsframe.skim_frame()` are unique values,
 percentage missing, mean, standard deviation, minimum, median, and maximum.
 
 Where possible, `statsframe` will print a table to the console and return a
@@ -43,7 +43,7 @@ df = (
           .drop("rownames")
     )
 
-stats = sf.skim(df)
+stats = sf.skim_frame(df)
 
 Summary Statistics
 Rows: 32, Columns: 11
@@ -74,7 +74,7 @@ trees_df = pd.read_csv(
     "https://vincentarelbundock.github.io/Rdatasets/csv/datasets/trees.csv"
 ).drop(columns=["rownames"])
 
-trees_stats = sf.skim(trees_df)
+trees_stats = sf.skim_frame(trees_df)
 
 Summary Statistics
 Rows: 31, Columns: 3

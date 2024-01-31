@@ -30,8 +30,12 @@ install-hooks:
 style: install-hooks
 	poetry run pre-commit run --hook-stage manual --all-files
 
+# Run pytest
+tests:
+	poetry run pytest
+
 # Run pytest with coverage
-pytest-cov:
+tests-cov:
 	poetry run pytest --cov-report term --cov=statsframe
 
 # Git add file
@@ -52,7 +56,7 @@ git-push:
 	poetry run git push
 
 # Build the package
-build: pytest-cov
+build: tests
 	poetry build
 
 # docs: https://python-poetry.org/docs/libraries#packaging

@@ -13,21 +13,16 @@ df = pl.DataFrame(
 
 expected_df = pl.DataFrame(
     {
-        "": ["A", "B"],
-        "Unique (#)": [4, 4],
-        "Missing (%)": [0.00, 0.00],
-        "Mean": [2.00, 2.50],
-        "SD": [1.825742, 1.290994],
-        "Min": [0.00, 1.00],
-        "Median": [2.00, 2.50],
-        "Max": [4.00, 4.00],
+        "var": ["A", "B"],
+        "A": [1.0, -0.8485281374238571],
+        "B": [-0.8485281374238571, 1.0],
     }
 )
 
 
-def test_skim_numeric_df(data=df):
+def test_correlation_df(data=df):
     # Act
-    result = sf.skim(data)
+    result = sf.correlation_frame(data)
 
     # Assert
     assert_frame_equal(result, expected_df)

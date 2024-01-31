@@ -1,6 +1,6 @@
 # %% [markdown]
 # ---
-# title: Get started with StatsFrame
+# title: Get started with `statsframe`
 # ---
 
 # %% [markdown]
@@ -22,7 +22,7 @@ library to produce tables that can be easily customized and exported to other fo
 
 As an example of `statsframe` usage, the `skim` function provides a
 summary of a DataFrame (either `polars.DataFrame` or `pandas.DataFrame`).
-The default summary statistics returned by `statsframe.skim()` are unique values,
+The default summary statistics returned by `statsframe.skim_frame()` are unique values,
 percentage missing, mean, standard deviation, minimum, median, and maximum.
 
 Where possible, `statsframe` will print a table to the console and return a
@@ -38,14 +38,18 @@ modified using the
 
 import polars as pl
 import statsframe as sf
+from great_tables import GT
 
 file_path = "https://vincentarelbundock.github.io/Rdatasets/csv/datasets/"
 df = pl.read_csv(f"{file_path}/mtcars.csv").drop("rownames")
 
-stats = sf.skim(df)
+stats = sf.skim_frame(df)
 
 # %%
-(pl.read_csv(f"{file_path}/mtcars.csv").drop("rownames").pipe(sf.skim))
+(df.pipe(sf.skim_frame, output="simple"))
+# %%
+(df.pipe(sf.skim_frame, output="simple").pipe(GT))
+
 # %% [markdown]
 """
 We can achieve the same result above with a pandas DataFrame.
@@ -58,4 +62,30 @@ import statsframe as sf
 
 trees_df = pd.read_csv(f"{file_path}/trees.csv").drop(columns=["rownames"])
 
-trees_stats = sf.skim(trees_df)
+trees_stats = sf.skim_frame(trees_df)
+
+
+# %%
+corr = sf.correlation_frame(df, method="pearson")
+
+
+# %%
+(
+    GT(corr)
+    .data_color(
+        domain=[-1, 1],
+        palette=[
+            "#636363",
+            "#bdbdbd",
+            "#f0f0f0",
+            "#ffffff",
+            "#f0f0f0",
+            "#bdbdbd",
+            "#636363",
+        ],
+        na_color="#ffffff",
+    )
+    .fmt_number(columns=df.columns, decimals=2)
+)
+
+# %%
