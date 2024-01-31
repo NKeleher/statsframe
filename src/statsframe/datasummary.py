@@ -66,20 +66,13 @@ def correlation_frame(
     method: str = "pearson",
     output: str = "polars",
     float_precision: int = 2,
-    align: str = "r",
     title: str = "Correlation Matrix",
-    color_palette: str = [
-        "#636363",
-        "#bdbdbd",
-        "#f0f0f0",
-        "#ffffff",
-        "#f0f0f0",
-        "#bdbdbd",
-        "#636363",
-    ],
-    na_color: str = "#ffffff",
+    notes: str = None,
+    align: str = "r",
+    color_palette: str = None,
+    na_color: str = None,
 ):
-    data = convert_to_polars(data)
+    data = convert_to_polars(data).select(cs.numeric())
     if method == "pearson":
         corr_tab = data.corr()
         var_list = corr_tab.columns
@@ -113,6 +106,19 @@ def correlation_frame(
             print(f"{shape_details}")
             print(corr_tab)
     elif output == "gt":
+        if color_palette is None:
+            color_palette = [
+                "#636363",
+                "#bdbdbd",
+                "#f0f0f0",
+                "#ffffff",
+                "#f0f0f0",
+                "#bdbdbd",
+                "#636363",
+            ]
+        if na_color is None:
+            na_color = "#ffffff"
+
         (
             GT(corr_tab)
             .data_color(
@@ -122,6 +128,8 @@ def correlation_frame(
             )
             .fmt_number(columns=var_list, decimals=float_precision)
             .cols_align(align=tbl_align.lower())
+            .tab_header(title=title)
+            .tab_source_note(source_note=f"{notes}")
         )
     else:
         raise ValueError("Supported outputs are polars, markdown, simple, and gt")
@@ -225,6 +233,7 @@ def skim_frame(
                 title=title,
                 subtitle=f"Rows: {data.height}, Columns: {data.width}",
             )
+            .tab_source_note(source_note=f"{notes}")
         )
     else:
         raise ValueError("Supported outputs are polars, markdown, simple, and gt")
