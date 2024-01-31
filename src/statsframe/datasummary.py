@@ -11,56 +11,6 @@ from ._tbl_data import DataFrameLike  # , SeriesLike
 cat_cols = []
 
 
-class StatsFrame:
-    def __init__(
-        self,
-        stats_tab,
-        data,
-        title,
-        shape_details,
-        float_cols,
-        float_precision,
-        tbl_formatting,
-        tbl_align,
-        output,
-    ):
-        self.stats_tab = stats_tab
-        self.data = data
-        self.title = title
-        self.shape_details = shape_details
-        self.float_cols = float_cols
-        self.float_precision = float_precision
-        self.tbl_formatting = tbl_formatting
-        self.tbl_align = tbl_align
-        self.output = output
-
-    def display(self):
-        if self.output == "polars":
-            with pl.Config(
-                float_precision=self.float_precision,
-                tbl_formatting=self.tbl_formatting,
-                tbl_cell_alignment=self.tbl_align,
-                tbl_hide_column_names=False,
-                tbl_hide_column_data_types=True,
-                tbl_hide_dataframe_shape=True,
-            ):
-                print(f"{self.title}")
-                print(f"{self.shape_details}")
-                print(self.stats_tab)
-        elif self.output == "gt":
-            (
-                GT(self.stats_tab)
-                .fmt_number(columns=self.float_cols, decimals=self.float_precision)
-                .cols_align(align=self.tbl_align.lower())
-                .tab_header(
-                    title=self.title,
-                    subtitle=f"Rows: {self.data.height}, Columns: {self.data.width}",
-                )
-            )
-        else:
-            raise ValueError("Supported outputs are polars, markdown, simple, and gt")
-
-
 def correlation_frame(
     data: DataFrameLike,
     method: str = "pearson",
@@ -72,6 +22,34 @@ def correlation_frame(
     color_palette: str = None,
     na_color: str = None,
 ):
+    """
+    Generates a correlation matrix based on the given data.
+
+    Args:
+        data: The input data to compute the correlation matrix on.
+        method: The method used to compute the correlation matrix.
+        Supported methods are "pearson", "kendall", and "spearman".
+        output: The output format of the correlation matrix.
+        Supported formats are "polars", "markdown", "simple", and "gt".
+        float_precision: The number of decimal places to round the correlation
+        values to.
+        title: The title of the correlation matrix.
+        notes: Additional notes or comments to include in the correlation matrix.
+        align: The alignment of the table cells.
+        Supported alignments are "r" (right), "l" (left), and "c" (center).
+        color_palette: The color palette to use for formatting the correlation
+        matrix when output is "gt".
+        na_color: The color to use for representing missing values in the
+        correlation matrix when output is "gt".
+
+    Returns:
+        The correlation matrix as a DataFrameLike object.
+
+    Raises:
+        ValueError: If an unsupported method or output format is specified.
+    """
+    ...
+
     data = convert_to_polars(data).select(cs.numeric())
     if method == "pearson":
         corr_tab = data.corr()
