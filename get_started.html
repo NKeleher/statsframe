@@ -191,40 +191,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code>Summary Statistics
 Rows: 32, Columns: 11
-┌──────┬────────────┬─────────────┬───────┬───────┬──────┬────────┬───────┐
-│      ┆ Unique (#) ┆ Missing (%) ┆  Mean ┆    SD ┆  Min ┆ Median ┆   Max │
-╞══════╪════════════╪═════════════╪═══════╪═══════╪══════╪════════╪═══════╡
-│  mpg ┆         25 ┆         0.0 ┆  20.1 ┆   6.0 ┆ 10.4 ┆   19.2 ┆  33.9 │
-│  cyl ┆          3 ┆         0.0 ┆   6.2 ┆   1.8 ┆  4.0 ┆    6.0 ┆   8.0 │
-│ disp ┆         27 ┆         0.0 ┆ 230.7 ┆ 123.9 ┆ 71.1 ┆  196.3 ┆ 472.0 │
-│   hp ┆         22 ┆         0.0 ┆ 146.7 ┆  68.6 ┆ 52.0 ┆  123.0 ┆ 335.0 │
-│ drat ┆         22 ┆         0.0 ┆   3.6 ┆   0.5 ┆  2.8 ┆    3.7 ┆   4.9 │
-│   wt ┆         29 ┆         0.0 ┆   3.2 ┆   1.0 ┆  1.5 ┆    3.3 ┆   5.4 │
-│ qsec ┆         30 ┆         0.0 ┆  17.8 ┆   1.8 ┆ 14.5 ┆   17.7 ┆  22.9 │
-│   vs ┆          2 ┆         0.0 ┆   0.4 ┆   0.5 ┆  0.0 ┆    0.0 ┆   1.0 │
-│   am ┆          2 ┆         0.0 ┆   0.4 ┆   0.5 ┆  0.0 ┆    0.0 ┆   1.0 │
-│ gear ┆          3 ┆         0.0 ┆   3.7 ┆   0.7 ┆  3.0 ┆    4.0 ┆   5.0 │
-│ carb ┆          6 ┆         0.0 ┆   2.8 ┆   1.6 ┆  1.0 ┆    2.0 ┆   8.0 │
-└──────┴────────────┴─────────────┴───────┴───────┴──────┴────────┴───────┘</code></pre>
++-------------------------------------------------------------------------+
+|        Unique (#)   Missing (%)    Mean      SD    Min   Median     Max |
++=========================================================================+
+|  mpg           25           0.0    20.1     6.0   10.4     19.2    33.9 |
+|  cyl            3           0.0     6.2     1.8    4.0      6.0     8.0 |
+| disp           27           0.0   230.7   123.9   71.1    196.3   472.0 |
+|   hp           22           0.0   146.7    68.6   52.0    123.0   335.0 |
+| drat           22           0.0     3.6     0.5    2.8      3.7     4.9 |
+|   wt           29           0.0     3.2     1.0    1.5      3.3     5.4 |
+| qsec           30           0.0    17.8     1.8   14.5     17.7    22.9 |
+|   vs            2           0.0     0.4     0.5    0.0      0.0     1.0 |
+|   am            2           0.0     0.4     0.5    0.0      0.0     1.0 |
+| gear            3           0.0     3.7     0.7    3.0      4.0     5.0 |
+| carb            6           0.0     2.8     1.6    1.0      2.0     8.0 |
++-------------------------------------------------------------------------+</code></pre>
 </div>
 </div>
-<div id="1adfc56e" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>(df.pipe(sf.skim_frame, output<span class="op">=</span><span class="st">"simple"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="b887f0db" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>(df.pipe(sf.skim_frame, output<span class="op">=</span><span class="st">"default"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Summary Statistics
 Rows: 32, Columns: 11
-       Unique (#)  Missing (%)   Mean     SD   Min  Median    Max 
-  mpg          25          0.0   20.1    6.0  10.4    19.2   33.9 
-  cyl           3          0.0    6.2    1.8   4.0     6.0    8.0 
- disp          27          0.0  230.7  123.9  71.1   196.3  472.0 
-   hp          22          0.0  146.7   68.6  52.0   123.0  335.0 
- drat          22          0.0    3.6    0.5   2.8     3.7    4.9 
-   wt          29          0.0    3.2    1.0   1.5     3.3    5.4 
- qsec          30          0.0   17.8    1.8  14.5    17.7   22.9 
-   vs           2          0.0    0.4    0.5   0.0     0.0    1.0 
-   am           2          0.0    0.4    0.5   0.0     0.0    1.0 
- gear           3          0.0    3.7    0.7   3.0     4.0    5.0 
- carb           6          0.0    2.8    1.6   1.0     2.0    8.0 </code></pre>
++-------------------------------------------------------------------------+
+|        Unique (#)   Missing (%)    Mean      SD    Min   Median     Max |
++=========================================================================+
+|  mpg           25           0.0    20.1     6.0   10.4     19.2    33.9 |
+|  cyl            3           0.0     6.2     1.8    4.0      6.0     8.0 |
+| disp           27           0.0   230.7   123.9   71.1    196.3   472.0 |
+|   hp           22           0.0   146.7    68.6   52.0    123.0   335.0 |
+| drat           22           0.0     3.6     0.5    2.8      3.7     4.9 |
+|   wt           29           0.0     3.2     1.0    1.5      3.3     5.4 |
+| qsec           30           0.0    17.8     1.8   14.5     17.7    22.9 |
+|   vs            2           0.0     0.4     0.5    0.0      0.0     1.0 |
+|   am            2           0.0     0.4     0.5    0.0      0.0     1.0 |
+| gear            3           0.0     3.7     0.7    3.0      4.0     5.0 |
+| carb            6           0.0     2.8     1.6    1.0      2.0     8.0 |
++-------------------------------------------------------------------------+</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <div><style>
@@ -374,8 +377,175 @@ Rows: 32, Columns: 11
 </div>
 </div>
 </div>
-<div id="afe53855" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>(df.pipe(sf.skim_frame, output<span class="op">=</span><span class="st">"simple"</span>).pipe(GT))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="3a6e18d1" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>(df.pipe(sf.skim_frame, output<span class="op">=</span><span class="st">"markdown"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Summary Statistics
+Rows: 32, Columns: 11
+|      | Unique (#) | Missing (%) |  Mean |    SD |  Min | Median |   Max |
+|------|------------|-------------|-------|-------|------|--------|-------|
+|  mpg |         25 |         0.0 |  20.1 |   6.0 | 10.4 |   19.2 |  33.9 |
+|  cyl |          3 |         0.0 |   6.2 |   1.8 |  4.0 |    6.0 |   8.0 |
+| disp |         27 |         0.0 | 230.7 | 123.9 | 71.1 |  196.3 | 472.0 |
+|   hp |         22 |         0.0 | 146.7 |  68.6 | 52.0 |  123.0 | 335.0 |
+| drat |         22 |         0.0 |   3.6 |   0.5 |  2.8 |    3.7 |   4.9 |
+|   wt |         29 |         0.0 |   3.2 |   1.0 |  1.5 |    3.3 |   5.4 |
+| qsec |         30 |         0.0 |  17.8 |   1.8 | 14.5 |   17.7 |  22.9 |
+|   vs |          2 |         0.0 |   0.4 |   0.5 |  0.0 |    0.0 |   1.0 |
+|   am |          2 |         0.0 |   0.4 |   0.5 |  0.0 |    0.0 |   1.0 |
+| gear |          3 |         0.0 |   3.7 |   0.7 |  3.0 |    4.0 |   5.0 |
+| carb |          6 |         0.0 |   2.8 |   1.6 |  1.0 |    2.0 |   8.0 |</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (11, 8)</small>
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Unique (#)</th>
+<th data-quarto-table-cell-role="th">Missing (%)</th>
+<th data-quarto-table-cell-role="th">Mean</th>
+<th data-quarto-table-cell-role="th">SD</th>
+<th data-quarto-table-cell-role="th">Min</th>
+<th data-quarto-table-cell-role="th">Median</th>
+<th data-quarto-table-cell-role="th">Max</th>
+</tr>
+<tr class="odd">
+<th>str</th>
+<th>i64</th>
+<th>f64</th>
+<th>f64</th>
+<th>f64</th>
+<th>f64</th>
+<th>f64</th>
+<th>f64</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"mpg"</td>
+<td>25</td>
+<td>0.0</td>
+<td>20.090625</td>
+<td>6.026948</td>
+<td>10.4</td>
+<td>19.2</td>
+<td>33.9</td>
+</tr>
+<tr class="even">
+<td>"cyl"</td>
+<td>3</td>
+<td>0.0</td>
+<td>6.1875</td>
+<td>1.785922</td>
+<td>4.0</td>
+<td>6.0</td>
+<td>8.0</td>
+</tr>
+<tr class="odd">
+<td>"disp"</td>
+<td>27</td>
+<td>0.0</td>
+<td>230.721875</td>
+<td>123.938694</td>
+<td>71.1</td>
+<td>196.3</td>
+<td>472.0</td>
+</tr>
+<tr class="even">
+<td>"hp"</td>
+<td>22</td>
+<td>0.0</td>
+<td>146.6875</td>
+<td>68.562868</td>
+<td>52.0</td>
+<td>123.0</td>
+<td>335.0</td>
+</tr>
+<tr class="odd">
+<td>"drat"</td>
+<td>22</td>
+<td>0.0</td>
+<td>3.596563</td>
+<td>0.534679</td>
+<td>2.76</td>
+<td>3.695</td>
+<td>4.93</td>
+</tr>
+<tr class="even">
+<td>"wt"</td>
+<td>29</td>
+<td>0.0</td>
+<td>3.21725</td>
+<td>0.978457</td>
+<td>1.513</td>
+<td>3.325</td>
+<td>5.424</td>
+</tr>
+<tr class="odd">
+<td>"qsec"</td>
+<td>30</td>
+<td>0.0</td>
+<td>17.84875</td>
+<td>1.786943</td>
+<td>14.5</td>
+<td>17.71</td>
+<td>22.9</td>
+</tr>
+<tr class="even">
+<td>"vs"</td>
+<td>2</td>
+<td>0.0</td>
+<td>0.4375</td>
+<td>0.504016</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>1.0</td>
+</tr>
+<tr class="odd">
+<td>"am"</td>
+<td>2</td>
+<td>0.0</td>
+<td>0.40625</td>
+<td>0.498991</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>1.0</td>
+</tr>
+<tr class="even">
+<td>"gear"</td>
+<td>3</td>
+<td>0.0</td>
+<td>3.6875</td>
+<td>0.737804</td>
+<td>3.0</td>
+<td>4.0</td>
+<td>5.0</td>
+</tr>
+<tr class="odd">
+<td>"carb"</td>
+<td>6</td>
+<td>0.0</td>
+<td>2.8125</td>
+<td>1.6152</td>
+<td>1.0</td>
+<td>2.0</td>
+<td>8.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="95649fc2" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>(df.pipe(sf.skim_frame, output<span class="op">=</span><span class="st">"no_borders"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Summary Statistics
 Rows: 32, Columns: 11
@@ -392,311 +562,419 @@ Rows: 32, Columns: 11
  gear           3          0.0    3.7    0.7   3.0     4.0    5.0 
  carb           6          0.0    2.8    1.6   1.0     2.0    8.0 </code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="3">
-<div id="ljwzfdxuhe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>
-#ljwzfdxuhe table {
-          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
-          -webkit-font-smoothing: antialiased;
-          -moz-osx-font-smoothing: grayscale;
-        }
-
- #ljwzfdxuhe thead, tbody, tfoot, tr, td, th { border-style: none; }
-#ljwzfdxuhe p { margin: 0; padding: 0; }
- #ljwzfdxuhe .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
- #ljwzfdxuhe .gt_caption { padding-top: 4px; padding-bottom: 4px; }
- #ljwzfdxuhe .gt_title { color: #333333; font-size: 125%; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
- #ljwzfdxuhe .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
- #ljwzfdxuhe .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
- #ljwzfdxuhe .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
- #ljwzfdxuhe .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
- #ljwzfdxuhe .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
- #ljwzfdxuhe .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
- #ljwzfdxuhe .gt_column_spanner_outer:first-child { padding-left: 0; }
- #ljwzfdxuhe .gt_column_spanner_outer:last-child { padding-right: 0; }
- #ljwzfdxuhe .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
- #ljwzfdxuhe .gt_spanner_row { border-bottom-style: hidden; }
- #ljwzfdxuhe .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
- #ljwzfdxuhe .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
- #ljwzfdxuhe .gt_from_md > :first-child { margin-top: 0; }
- #ljwzfdxuhe .gt_from_md > :last-child { margin-bottom: 0; }
- #ljwzfdxuhe .gt_row { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
- #ljwzfdxuhe .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
- #ljwzfdxuhe .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
- #ljwzfdxuhe .gt_row_group_first td { border-top-width: 2px; }
- #ljwzfdxuhe .gt_row_group_first th { border-top-width: 2px; }
- #ljwzfdxuhe .gt_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
- #ljwzfdxuhe .gt_first_summary_row { border-top-style: solid; border-top-color: #D3D3D3; }
- #ljwzfdxuhe .gt_first_summary_row.thick { border-top-width: 2px; }
- #ljwzfdxuhe .gt_last_summary_row { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
- #ljwzfdxuhe .gt_grand_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
- #ljwzfdxuhe .gt_first_grand_summary_row { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; border-top-style: double; border-top-width: 6px; border-top-color: #D3D3D3; }
- #ljwzfdxuhe .gt_last_grand_summary_row_top { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; border-bottom-style: double; border-bottom-width: 6px; border-bottom-color: #D3D3D3; }
- #ljwzfdxuhe .gt_striped { background-color: rgba(128,128,128,0.05); }
- #ljwzfdxuhe .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
- #ljwzfdxuhe .gt_footnotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
- #ljwzfdxuhe .gt_footnote { margin: 0px; font-size: 90%; padding-left: 4px; padding-right: 4px; padding-left: 5px; padding-right: 5px; }
- #ljwzfdxuhe .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
- #ljwzfdxuhe .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; }
- #ljwzfdxuhe .gt_left { text-align: left; }
- #ljwzfdxuhe .gt_center { text-align: center; }
- #ljwzfdxuhe .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
- #ljwzfdxuhe .gt_font_normal { font-weight: normal; }
- #ljwzfdxuhe .gt_font_bold { font-weight: bold; }
- #ljwzfdxuhe .gt_font_italic { font-style: italic; }
- #ljwzfdxuhe .gt_super { font-size: 65%; }
- #ljwzfdxuhe .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
- #ljwzfdxuhe .gt_asterisk { font-size: 100%; vertical-align: 0; }
- 
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
 </style>
-
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<small>shape: (11, 8)</small>
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Unique (#)</th>
+<th data-quarto-table-cell-role="th">Missing (%)</th>
+<th data-quarto-table-cell-role="th">Mean</th>
+<th data-quarto-table-cell-role="th">SD</th>
+<th data-quarto-table-cell-role="th">Min</th>
+<th data-quarto-table-cell-role="th">Median</th>
+<th data-quarto-table-cell-role="th">Max</th>
+</tr>
+<tr class="odd">
+<th>str</th>
+<th>i64</th>
+<th>f64</th>
+<th>f64</th>
+<th>f64</th>
+<th>f64</th>
+<th>f64</th>
+<th>f64</th>
+</tr>
+</thead>
 <tbody>
-<tr class="odd gt_col_headings">
-<td class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></td>
-<td id="Unique (#)" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Unique (#)</td>
-<td id="Missing (%)" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Missing (%)</td>
-<td id="Mean" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Mean</td>
-<td id="SD" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">SD</td>
-<td id="Min" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Min</td>
-<td id="Median" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Median</td>
-<td id="Max" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Max</td>
-</tr>
-</tbody>
-<tbody class="gt_table_body">
 <tr class="odd">
-<td class="gt_row gt_left">mpg</td>
-<td class="gt_row gt_right">25</td>
-<td class="gt_row gt_right">0.0</td>
-<td class="gt_row gt_right">20.090624999999996</td>
-<td class="gt_row gt_right">6.026948052089105</td>
-<td class="gt_row gt_right">10.4</td>
-<td class="gt_row gt_right">19.2</td>
-<td class="gt_row gt_right">33.9</td>
+<td>"mpg"</td>
+<td>25</td>
+<td>0.0</td>
+<td>20.090625</td>
+<td>6.026948</td>
+<td>10.4</td>
+<td>19.2</td>
+<td>33.9</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left">cyl</td>
-<td class="gt_row gt_right">3</td>
-<td class="gt_row gt_right">0.0</td>
-<td class="gt_row gt_right">6.1875</td>
-<td class="gt_row gt_right">1.7859216469465444</td>
-<td class="gt_row gt_right">4.0</td>
-<td class="gt_row gt_right">6.0</td>
-<td class="gt_row gt_right">8.0</td>
+<td>"cyl"</td>
+<td>3</td>
+<td>0.0</td>
+<td>6.1875</td>
+<td>1.785922</td>
+<td>4.0</td>
+<td>6.0</td>
+<td>8.0</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left">disp</td>
-<td class="gt_row gt_right">27</td>
-<td class="gt_row gt_right">0.0</td>
-<td class="gt_row gt_right">230.72187500000004</td>
-<td class="gt_row gt_right">123.93869383138194</td>
-<td class="gt_row gt_right">71.1</td>
-<td class="gt_row gt_right">196.3</td>
-<td class="gt_row gt_right">472.0</td>
+<td>"disp"</td>
+<td>27</td>
+<td>0.0</td>
+<td>230.721875</td>
+<td>123.938694</td>
+<td>71.1</td>
+<td>196.3</td>
+<td>472.0</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left">hp</td>
-<td class="gt_row gt_right">22</td>
-<td class="gt_row gt_right">0.0</td>
-<td class="gt_row gt_right">146.6875</td>
-<td class="gt_row gt_right">68.56286848932059</td>
-<td class="gt_row gt_right">52.0</td>
-<td class="gt_row gt_right">123.0</td>
-<td class="gt_row gt_right">335.0</td>
+<td>"hp"</td>
+<td>22</td>
+<td>0.0</td>
+<td>146.6875</td>
+<td>68.562868</td>
+<td>52.0</td>
+<td>123.0</td>
+<td>335.0</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left">drat</td>
-<td class="gt_row gt_right">22</td>
-<td class="gt_row gt_right">0.0</td>
-<td class="gt_row gt_right">3.5965625000000006</td>
-<td class="gt_row gt_right">0.5346787360709716</td>
-<td class="gt_row gt_right">2.76</td>
-<td class="gt_row gt_right">3.6950000000000003</td>
-<td class="gt_row gt_right">4.93</td>
+<td>"drat"</td>
+<td>22</td>
+<td>0.0</td>
+<td>3.596563</td>
+<td>0.534679</td>
+<td>2.76</td>
+<td>3.695</td>
+<td>4.93</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left">wt</td>
-<td class="gt_row gt_right">29</td>
-<td class="gt_row gt_right">0.0</td>
-<td class="gt_row gt_right">3.2172499999999995</td>
-<td class="gt_row gt_right">0.9784574429896967</td>
-<td class="gt_row gt_right">1.513</td>
-<td class="gt_row gt_right">3.325</td>
-<td class="gt_row gt_right">5.424</td>
+<td>"wt"</td>
+<td>29</td>
+<td>0.0</td>
+<td>3.21725</td>
+<td>0.978457</td>
+<td>1.513</td>
+<td>3.325</td>
+<td>5.424</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left">qsec</td>
-<td class="gt_row gt_right">30</td>
-<td class="gt_row gt_right">0.0</td>
-<td class="gt_row gt_right">17.848750000000003</td>
-<td class="gt_row gt_right">1.7869432360968431</td>
-<td class="gt_row gt_right">14.5</td>
-<td class="gt_row gt_right">17.71</td>
-<td class="gt_row gt_right">22.9</td>
+<td>"qsec"</td>
+<td>30</td>
+<td>0.0</td>
+<td>17.84875</td>
+<td>1.786943</td>
+<td>14.5</td>
+<td>17.71</td>
+<td>22.9</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left">vs</td>
-<td class="gt_row gt_right">2</td>
-<td class="gt_row gt_right">0.0</td>
-<td class="gt_row gt_right">0.4375</td>
-<td class="gt_row gt_right">0.5040161287741853</td>
-<td class="gt_row gt_right">0.0</td>
-<td class="gt_row gt_right">0.0</td>
-<td class="gt_row gt_right">1.0</td>
+<td>"vs"</td>
+<td>2</td>
+<td>0.0</td>
+<td>0.4375</td>
+<td>0.504016</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>1.0</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left">am</td>
-<td class="gt_row gt_right">2</td>
-<td class="gt_row gt_right">0.0</td>
-<td class="gt_row gt_right">0.40625</td>
-<td class="gt_row gt_right">0.49899091723584604</td>
-<td class="gt_row gt_right">0.0</td>
-<td class="gt_row gt_right">0.0</td>
-<td class="gt_row gt_right">1.0</td>
+<td>"am"</td>
+<td>2</td>
+<td>0.0</td>
+<td>0.40625</td>
+<td>0.498991</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>1.0</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left">gear</td>
-<td class="gt_row gt_right">3</td>
-<td class="gt_row gt_right">0.0</td>
-<td class="gt_row gt_right">3.6875</td>
-<td class="gt_row gt_right">0.7378040652569471</td>
-<td class="gt_row gt_right">3.0</td>
-<td class="gt_row gt_right">4.0</td>
-<td class="gt_row gt_right">5.0</td>
+<td>"gear"</td>
+<td>3</td>
+<td>0.0</td>
+<td>3.6875</td>
+<td>0.737804</td>
+<td>3.0</td>
+<td>4.0</td>
+<td>5.0</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left">carb</td>
-<td class="gt_row gt_right">6</td>
-<td class="gt_row gt_right">0.0</td>
-<td class="gt_row gt_right">2.8125</td>
-<td class="gt_row gt_right">1.6151999776318522</td>
-<td class="gt_row gt_right">1.0</td>
-<td class="gt_row gt_right">2.0</td>
-<td class="gt_row gt_right">8.0</td>
+<td>"carb"</td>
+<td>6</td>
+<td>0.0</td>
+<td>2.8125</td>
+<td>1.6152</td>
+<td>1.0</td>
+<td>2.0</td>
+<td>8.0</td>
 </tr>
 </tbody>
 </table>
-
-
 </div>
-        
+</div>
+</div>
+<div id="93755097" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>(df.pipe(sf.skim_frame, output<span class="op">=</span><span class="st">"gt"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (11, 8)</small>
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Unique (#)</th>
+<th data-quarto-table-cell-role="th">Missing (%)</th>
+<th data-quarto-table-cell-role="th">Mean</th>
+<th data-quarto-table-cell-role="th">SD</th>
+<th data-quarto-table-cell-role="th">Min</th>
+<th data-quarto-table-cell-role="th">Median</th>
+<th data-quarto-table-cell-role="th">Max</th>
+</tr>
+<tr class="odd">
+<th>str</th>
+<th>i64</th>
+<th>f64</th>
+<th>f64</th>
+<th>f64</th>
+<th>f64</th>
+<th>f64</th>
+<th>f64</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"mpg"</td>
+<td>25</td>
+<td>0.0</td>
+<td>20.090625</td>
+<td>6.026948</td>
+<td>10.4</td>
+<td>19.2</td>
+<td>33.9</td>
+</tr>
+<tr class="even">
+<td>"cyl"</td>
+<td>3</td>
+<td>0.0</td>
+<td>6.1875</td>
+<td>1.785922</td>
+<td>4.0</td>
+<td>6.0</td>
+<td>8.0</td>
+</tr>
+<tr class="odd">
+<td>"disp"</td>
+<td>27</td>
+<td>0.0</td>
+<td>230.721875</td>
+<td>123.938694</td>
+<td>71.1</td>
+<td>196.3</td>
+<td>472.0</td>
+</tr>
+<tr class="even">
+<td>"hp"</td>
+<td>22</td>
+<td>0.0</td>
+<td>146.6875</td>
+<td>68.562868</td>
+<td>52.0</td>
+<td>123.0</td>
+<td>335.0</td>
+</tr>
+<tr class="odd">
+<td>"drat"</td>
+<td>22</td>
+<td>0.0</td>
+<td>3.596563</td>
+<td>0.534679</td>
+<td>2.76</td>
+<td>3.695</td>
+<td>4.93</td>
+</tr>
+<tr class="even">
+<td>"wt"</td>
+<td>29</td>
+<td>0.0</td>
+<td>3.21725</td>
+<td>0.978457</td>
+<td>1.513</td>
+<td>3.325</td>
+<td>5.424</td>
+</tr>
+<tr class="odd">
+<td>"qsec"</td>
+<td>30</td>
+<td>0.0</td>
+<td>17.84875</td>
+<td>1.786943</td>
+<td>14.5</td>
+<td>17.71</td>
+<td>22.9</td>
+</tr>
+<tr class="even">
+<td>"vs"</td>
+<td>2</td>
+<td>0.0</td>
+<td>0.4375</td>
+<td>0.504016</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>1.0</td>
+</tr>
+<tr class="odd">
+<td>"am"</td>
+<td>2</td>
+<td>0.0</td>
+<td>0.40625</td>
+<td>0.498991</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>1.0</td>
+</tr>
+<tr class="even">
+<td>"gear"</td>
+<td>3</td>
+<td>0.0</td>
+<td>3.6875</td>
+<td>0.737804</td>
+<td>3.0</td>
+<td>4.0</td>
+<td>5.0</td>
+</tr>
+<tr class="odd">
+<td>"carb"</td>
+<td>6</td>
+<td>0.0</td>
+<td>2.8125</td>
+<td>1.6152</td>
+<td>1.0</td>
+<td>2.0</td>
+<td>8.0</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 <p>We can achieve the same result above with a pandas DataFrame.</p>
-<div id="trees-skim" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsframe <span class="im">as</span> sf</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>trees_df <span class="op">=</span> pd.read_csv(<span class="ss">f"</span><span class="sc">{</span>file_path<span class="sc">}</span><span class="ss">/trees.csv"</span>).drop(columns<span class="op">=</span>[<span class="st">"rownames"</span>])</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>trees_stats <span class="op">=</span> sf.skim_frame(trees_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="trees-skim" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsframe <span class="im">as</span> sf</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>trees_df <span class="op">=</span> pd.read_csv(<span class="ss">f"</span><span class="sc">{</span>file_path<span class="sc">}</span><span class="ss">/trees.csv"</span>).drop(columns<span class="op">=</span>[<span class="st">"rownames"</span>])</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>trees_stats <span class="op">=</span> sf.skim_frame(trees_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Summary Statistics
 Rows: 31, Columns: 3
-┌────────┬────────────┬─────────────┬──────┬──────┬──────┬────────┬──────┐
-│        ┆ Unique (#) ┆ Missing (%) ┆ Mean ┆   SD ┆  Min ┆ Median ┆  Max │
-╞════════╪════════════╪═════════════╪══════╪══════╪══════╪════════╪══════╡
-│  Girth ┆         27 ┆         0.0 ┆ 13.2 ┆  3.1 ┆  8.3 ┆   12.9 ┆ 20.6 │
-│ Height ┆         21 ┆         0.0 ┆ 76.0 ┆  6.4 ┆ 63.0 ┆   76.0 ┆ 87.0 │
-│ Volume ┆         30 ┆         0.0 ┆ 30.2 ┆ 16.4 ┆ 10.2 ┆   24.2 ┆ 77.0 │
-└────────┴────────────┴─────────────┴──────┴──────┴──────┴────────┴──────┘</code></pre>
++------------------------------------------------------------------------+
+|          Unique (#)   Missing (%)   Mean     SD    Min   Median    Max |
++========================================================================+
+|  Girth           27           0.0   13.2    3.1    8.3     12.9   20.6 |
+| Height           21           0.0   76.0    6.4   63.0     76.0   87.0 |
+| Volume           30           0.0   30.2   16.4   10.2     24.2   77.0 |
++------------------------------------------------------------------------+</code></pre>
 </div>
 </div>
-<div id="884118c4" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>corr <span class="op">=</span> sf.correlation_frame(df, method<span class="op">=</span><span class="st">"pearson"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="ce49835d" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>corr <span class="op">=</span> sf.correlation_frame(df, method<span class="op">=</span><span class="st">"pearson"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Correlation Matrix
 Rows: 32, Columns: 11
-┌──────┬───────┬───────┬───────┬───┬───────┬───────┬───────┬───────┐
-│  var ┆   mpg ┆   cyl ┆  disp ┆ … ┆    vs ┆    am ┆  gear ┆  carb │
-╞══════╪═══════╪═══════╪═══════╪═══╪═══════╪═══════╪═══════╪═══════╡
-│  mpg ┆  1.00 ┆ -0.85 ┆ -0.85 ┆ … ┆  0.66 ┆  0.60 ┆  0.48 ┆ -0.55 │
-│  cyl ┆ -0.85 ┆  1.00 ┆  0.90 ┆ … ┆ -0.81 ┆ -0.52 ┆ -0.49 ┆  0.53 │
-│ disp ┆ -0.85 ┆  0.90 ┆  1.00 ┆ … ┆ -0.71 ┆ -0.59 ┆ -0.56 ┆  0.39 │
-│   hp ┆ -0.78 ┆  0.83 ┆  0.79 ┆ … ┆ -0.72 ┆ -0.24 ┆ -0.13 ┆  0.75 │
-│ drat ┆  0.68 ┆ -0.70 ┆ -0.71 ┆ … ┆  0.44 ┆  0.71 ┆  0.70 ┆ -0.09 │
-│   wt ┆ -0.87 ┆  0.78 ┆  0.89 ┆ … ┆ -0.55 ┆ -0.69 ┆ -0.58 ┆  0.43 │
-│ qsec ┆  0.42 ┆ -0.59 ┆ -0.43 ┆ … ┆  0.74 ┆ -0.23 ┆ -0.21 ┆ -0.66 │
-│   vs ┆  0.66 ┆ -0.81 ┆ -0.71 ┆ … ┆  1.00 ┆  0.17 ┆  0.21 ┆ -0.57 │
-│   am ┆  0.60 ┆ -0.52 ┆ -0.59 ┆ … ┆  0.17 ┆  1.00 ┆  0.79 ┆  0.06 │
-│ gear ┆  0.48 ┆ -0.49 ┆ -0.56 ┆ … ┆  0.21 ┆  0.79 ┆  1.00 ┆  0.27 │
-│ carb ┆ -0.55 ┆  0.53 ┆  0.39 ┆ … ┆ -0.57 ┆  0.06 ┆  0.27 ┆  1.00 │
-└──────┴───────┴───────┴───────┴───┴───────┴───────┴───────┴───────┘</code></pre>
++------------------------------------------------------------------+
+|  var     mpg     cyl    disp   …      vs      am    gear    carb |
++==================================================================+
+|  mpg    1.00   -0.85   -0.85   …    0.66    0.60    0.48   -0.55 |
+|  cyl   -0.85    1.00    0.90   …   -0.81   -0.52   -0.49    0.53 |
+| disp   -0.85    0.90    1.00   …   -0.71   -0.59   -0.56    0.39 |
+|   hp   -0.78    0.83    0.79   …   -0.72   -0.24   -0.13    0.75 |
+| drat    0.68   -0.70   -0.71   …    0.44    0.71    0.70   -0.09 |
+|   wt   -0.87    0.78    0.89   …   -0.55   -0.69   -0.58    0.43 |
+| qsec    0.42   -0.59   -0.43   …    0.74   -0.23   -0.21   -0.66 |
+|   vs    0.66   -0.81   -0.71   …    1.00    0.17    0.21   -0.57 |
+|   am    0.60   -0.52   -0.59   …    0.17    1.00    0.79    0.06 |
+| gear    0.48   -0.49   -0.56   …    0.21    0.79    1.00    0.27 |
+| carb   -0.55    0.53    0.39   …   -0.57    0.06    0.27    1.00 |
++------------------------------------------------------------------+</code></pre>
 </div>
 </div>
-<div id="cb18e3fc" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>(</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    GT(corr)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    .data_color(</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>        domain<span class="op">=</span>[<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>],</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        palette<span class="op">=</span>[</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">"#636363"</span>,</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">"#bdbdbd"</span>,</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>            <span class="st">"#f0f0f0"</span>,</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>            <span class="st">"#ffffff"</span>,</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>            <span class="st">"#f0f0f0"</span>,</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>            <span class="st">"#bdbdbd"</span>,</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>            <span class="st">"#636363"</span>,</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>        ],</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>        na_color<span class="op">=</span><span class="st">"#ffffff"</span>,</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    .fmt_number(columns<span class="op">=</span>df.columns, decimals<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
-<div id="mdpfnyyutu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="15090bc8" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    GT(corr)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    .data_color(</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>        domain<span class="op">=</span>[<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>],</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>        palette<span class="op">=</span>[</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">"#636363"</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">"#bdbdbd"</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>            <span class="st">"#f0f0f0"</span>,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>            <span class="st">"#ffffff"</span>,</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>            <span class="st">"#f0f0f0"</span>,</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>            <span class="st">"#bdbdbd"</span>,</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>            <span class="st">"#636363"</span>,</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>        ],</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>        na_color<span class="op">=</span><span class="st">"#ffffff"</span>,</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    .fmt_number(columns<span class="op">=</span>df.columns, decimals<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<div id="zfrlyglbvg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>
-#mdpfnyyutu table {
+#zfrlyglbvg table {
           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
         }
 
- #mdpfnyyutu thead, tbody, tfoot, tr, td, th { border-style: none; }
-#mdpfnyyutu p { margin: 0; padding: 0; }
- #mdpfnyyutu .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
- #mdpfnyyutu .gt_caption { padding-top: 4px; padding-bottom: 4px; }
- #mdpfnyyutu .gt_title { color: #333333; font-size: 125%; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
- #mdpfnyyutu .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
- #mdpfnyyutu .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
- #mdpfnyyutu .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
- #mdpfnyyutu .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
- #mdpfnyyutu .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
- #mdpfnyyutu .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
- #mdpfnyyutu .gt_column_spanner_outer:first-child { padding-left: 0; }
- #mdpfnyyutu .gt_column_spanner_outer:last-child { padding-right: 0; }
- #mdpfnyyutu .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
- #mdpfnyyutu .gt_spanner_row { border-bottom-style: hidden; }
- #mdpfnyyutu .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
- #mdpfnyyutu .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
- #mdpfnyyutu .gt_from_md > :first-child { margin-top: 0; }
- #mdpfnyyutu .gt_from_md > :last-child { margin-bottom: 0; }
- #mdpfnyyutu .gt_row { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
- #mdpfnyyutu .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
- #mdpfnyyutu .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
- #mdpfnyyutu .gt_row_group_first td { border-top-width: 2px; }
- #mdpfnyyutu .gt_row_group_first th { border-top-width: 2px; }
- #mdpfnyyutu .gt_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
- #mdpfnyyutu .gt_first_summary_row { border-top-style: solid; border-top-color: #D3D3D3; }
- #mdpfnyyutu .gt_first_summary_row.thick { border-top-width: 2px; }
- #mdpfnyyutu .gt_last_summary_row { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
- #mdpfnyyutu .gt_grand_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
- #mdpfnyyutu .gt_first_grand_summary_row { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; border-top-style: double; border-top-width: 6px; border-top-color: #D3D3D3; }
- #mdpfnyyutu .gt_last_grand_summary_row_top { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; border-bottom-style: double; border-bottom-width: 6px; border-bottom-color: #D3D3D3; }
- #mdpfnyyutu .gt_striped { background-color: rgba(128,128,128,0.05); }
- #mdpfnyyutu .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
- #mdpfnyyutu .gt_footnotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
- #mdpfnyyutu .gt_footnote { margin: 0px; font-size: 90%; padding-left: 4px; padding-right: 4px; padding-left: 5px; padding-right: 5px; }
- #mdpfnyyutu .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
- #mdpfnyyutu .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; }
- #mdpfnyyutu .gt_left { text-align: left; }
- #mdpfnyyutu .gt_center { text-align: center; }
- #mdpfnyyutu .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
- #mdpfnyyutu .gt_font_normal { font-weight: normal; }
- #mdpfnyyutu .gt_font_bold { font-weight: bold; }
- #mdpfnyyutu .gt_font_italic { font-style: italic; }
- #mdpfnyyutu .gt_super { font-size: 65%; }
- #mdpfnyyutu .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
- #mdpfnyyutu .gt_asterisk { font-size: 100%; vertical-align: 0; }
+ #zfrlyglbvg thead, tbody, tfoot, tr, td, th { border-style: none; }
+#zfrlyglbvg p { margin: 0; padding: 0; }
+ #zfrlyglbvg .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
+ #zfrlyglbvg .gt_caption { padding-top: 4px; padding-bottom: 4px; }
+ #zfrlyglbvg .gt_title { color: #333333; font-size: 125%; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
+ #zfrlyglbvg .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
+ #zfrlyglbvg .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #zfrlyglbvg .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #zfrlyglbvg .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #zfrlyglbvg .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
+ #zfrlyglbvg .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
+ #zfrlyglbvg .gt_column_spanner_outer:first-child { padding-left: 0; }
+ #zfrlyglbvg .gt_column_spanner_outer:last-child { padding-right: 0; }
+ #zfrlyglbvg .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
+ #zfrlyglbvg .gt_spanner_row { border-bottom-style: hidden; }
+ #zfrlyglbvg .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
+ #zfrlyglbvg .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
+ #zfrlyglbvg .gt_from_md > :first-child { margin-top: 0; }
+ #zfrlyglbvg .gt_from_md > :last-child { margin-bottom: 0; }
+ #zfrlyglbvg .gt_row { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
+ #zfrlyglbvg .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
+ #zfrlyglbvg .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
+ #zfrlyglbvg .gt_row_group_first td { border-top-width: 2px; }
+ #zfrlyglbvg .gt_row_group_first th { border-top-width: 2px; }
+ #zfrlyglbvg .gt_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #zfrlyglbvg .gt_first_summary_row { border-top-style: solid; border-top-color: #D3D3D3; }
+ #zfrlyglbvg .gt_first_summary_row.thick { border-top-width: 2px; }
+ #zfrlyglbvg .gt_last_summary_row { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #zfrlyglbvg .gt_grand_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #zfrlyglbvg .gt_first_grand_summary_row { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; border-top-style: double; border-top-width: 6px; border-top-color: #D3D3D3; }
+ #zfrlyglbvg .gt_last_grand_summary_row_top { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; border-bottom-style: double; border-bottom-width: 6px; border-bottom-color: #D3D3D3; }
+ #zfrlyglbvg .gt_striped { background-color: rgba(128,128,128,0.05); }
+ #zfrlyglbvg .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #zfrlyglbvg .gt_footnotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #zfrlyglbvg .gt_footnote { margin: 0px; font-size: 90%; padding-left: 4px; padding-right: 4px; padding-left: 5px; padding-right: 5px; }
+ #zfrlyglbvg .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #zfrlyglbvg .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; }
+ #zfrlyglbvg .gt_left { text-align: left; }
+ #zfrlyglbvg .gt_center { text-align: center; }
+ #zfrlyglbvg .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
+ #zfrlyglbvg .gt_font_normal { font-weight: normal; }
+ #zfrlyglbvg .gt_font_bold { font-weight: bold; }
+ #zfrlyglbvg .gt_font_italic { font-style: italic; }
+ #zfrlyglbvg .gt_super { font-size: 65%; }
+ #zfrlyglbvg .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
+ #zfrlyglbvg .gt_asterisk { font-size: 100%; vertical-align: 0; }
  
 </style>
 
