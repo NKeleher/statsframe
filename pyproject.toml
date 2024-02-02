@@ -4,6 +4,12 @@ build-backend = "poetry_dynamic_versioning.backend"                          #"p
 
 [tool.poetry-dynamic-versioning]
 enable = true
+vcs = "git"
+style = "pep440"
+bump = true
+
+[tool.poetry-dynamic-versioning.substitution]
+files = ["src/statsframe/__init__.py"]
 
 [tool.poetry]
 name = "statsframe"
