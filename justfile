@@ -17,6 +17,9 @@ clean:
 poetry-update:
 	poetry update
 
+install-dynamic-version:
+	poetry self add "poetry-dynamic-versioning[plugin]"
+
 # Install development dependencies
 install-dev:
 	poetry config virtualenvs.in-project true
