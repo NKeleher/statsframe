@@ -46,9 +46,16 @@ df = pl.read_csv(f"{file_path}/mtcars.csv").drop("rownames")
 stats = sf.skim_frame(df)
 
 # %%
-(df.pipe(sf.skim_frame, output="simple"))
+(df.pipe(sf.skim_frame, output="default"))
+
 # %%
-(df.pipe(sf.skim_frame, output="simple").pipe(GT))
+(df.pipe(sf.skim_frame, output="markdown"))
+
+# %%
+(df.pipe(sf.skim_frame, output="no_borders"))
+
+# %%
+(df.pipe(sf.skim_frame, output="gt"))
 
 # %% [markdown]
 """

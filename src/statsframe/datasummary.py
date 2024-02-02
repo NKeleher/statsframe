@@ -14,7 +14,7 @@ cat_cols = []
 def correlation_frame(
     data: DataFrameLike,
     method: str = "pearson",
-    output: str = "polars",
+    output: str = "default",
     float_precision: int = 2,
     title: str = "Correlation Matrix",
     notes: str = None,
@@ -30,7 +30,7 @@ def correlation_frame(
         method: The method used to compute the correlation matrix.
         Supported methods are "pearson", "kendall", and "spearman".
         output: The output format of the correlation matrix.
-        Supported formats are "polars", "markdown", "simple", and "gt".
+        Supported formats are "default", "markdown", "no_borders", and "gt".
         float_precision: The number of decimal places to round the correlation
         values to.
         title: The title of the correlation matrix.
@@ -68,8 +68,12 @@ def correlation_frame(
     align_dict = {"r": "RIGHT", "l": "LEFT", "c": "CENTER"}
     tbl_align = align_dict[align]
 
-    if output in {"polars", "markdown", "simple"}:
-        format_dict = {"polars": None, "markdown": "ASCII_MARKDOWN", "simple": "NOTHING"}
+    if output in {"default", "markdown", "no_borders"}:
+        format_dict = {
+            "default": "ASCII_BORDERS_ONLY_CONDENSED",
+            "markdown": "ASCII_MARKDOWN",
+            "no_borders": "NOTHING",
+        }
         tbl_formatting = format_dict[output]
         shape_details = f"Rows: {data.height}, Columns: {data.width}"
 
@@ -111,7 +115,7 @@ def correlation_frame(
             .tab_source_note(source_note=f"{notes}")
         )
     else:
-        raise ValueError("Supported outputs are polars, markdown, simple, and gt")
+        raise ValueError("Supported outputs are default, markdown, no_borders, and gt")
 
     return corr_tab
 
@@ -127,7 +131,7 @@ def skim_frame(
     data: pl.DataFrame,
     type: str = "numeric",
     stats: str = "simple",
-    output: str = "polars",
+    output: str = "default",
     float_precision: int = 1,
     histogram: bool = False,
     title: str = "Summary Statistics",
@@ -187,8 +191,12 @@ def skim_frame(
     align_dict = {"r": "RIGHT", "l": "LEFT", "c": "CENTER"}
     tbl_align = align_dict[align]
 
-    if output in {"polars", "markdown", "simple"}:
-        format_dict = {"polars": None, "markdown": "ASCII_MARKDOWN", "simple": "NOTHING"}
+    if output in {"default", "markdown", "no_borders"}:
+        format_dict = {
+            "default": "ASCII_BORDERS_ONLY_CONDENSED",
+            "markdown": "ASCII_MARKDOWN",
+            "no_borders": "NOTHING",
+        }
         tbl_formatting = format_dict[output]
         shape_details = f"Rows: {data.height}, Columns: {data.width}"
 
@@ -215,7 +223,7 @@ def skim_frame(
             .tab_source_note(source_note=f"{notes}")
         )
     else:
-        raise ValueError("Supported outputs are polars, markdown, simple, and gt")
+        raise ValueError("Supported outputs are default, markdown, no_borders, and gt")
 
     return stats_tab
 
