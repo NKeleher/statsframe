@@ -63,17 +63,6 @@ repos:
   #      - id: mypy
   #        name: mypy
 
-  # docformatter - formats docstrings to follow PEP 257
-  - repo: https://github.com/pycqa/docformatter
-    rev: v1.7.5
-    hooks:
-      - id: docformatter
-        name: docformatter
-        args: [--in-place]
-        additional_dependencies: [tomli]
-        files: (^src/|^tests/|^docs/)
-        stages: [commit, manual]
-
   # prettier - formatting JS, CSS, JSON, Markdown, ...
   - repo: https://github.com/pre-commit/mirrors-prettier
     rev: v4.0.0-alpha.8

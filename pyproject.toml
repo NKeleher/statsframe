@@ -41,12 +41,10 @@ pytest-cov = "^4.1.0"
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.6.0"
 ruff = "^0.1.13"
-black = "^23.12.1"
 bandit = "^1.7.6"
-docformatter = "^1.7.5"
 mypy = "^1.8.0"
-jupyterlab = "^4.0.11"
 quartodoc = "^0.7.2"
+jupyterlab = "^4.0.11"
 jupytext = "^1.16.1"
 
 [build-system]
@@ -64,18 +62,11 @@ extend-include = ["*.ipynb"]
 ignore = ["E402"]
 indent-width = 4
 line-length = 90
-select = ["E", "F", "W", "I001"]
+select = ["D", "E", "F", "W", "I001"]
 src = ["src/statsframe", "tests", "docs"]
 
-# docs: https://docformatter.readthedocs.io/en/latest/usage.html
-[tool.docformatter]
-style = "sphinx"
-recursive = true
-pre-summary-newline = true
-make-summary-multi-line = true
-wrap-descriptions = 72
-wrap-summaries = 79
-blank = true
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
 
 [tool.codespell]
 skip = "*.lock"
