@@ -4,57 +4,57 @@ ci:
 default_language_version:
   python: python3.12
 
-default_stages: [commit]
+default_stages: [pre-commit]
 
 repos:
   # general checks (see here: https://pre-commit.com/hooks.html)
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v5.0.0
     hooks:
       - id: check-merge-conflict
-        stages: [commit]
+        stages: [pre-commit]
       - id: check-yaml
         args: [--allow-multiple-documents]
-        stages: [commit, manual]
+        stages: [pre-commit, manual]
       - id: check-toml
-        stages: [commit, manual]
+        stages: [pre-commit, manual]
       - id: end-of-file-fixer
-        stages: [commit, manual]
+        stages: [pre-commit, manual]
       - id: trailing-whitespace
-        stages: [commit, manual]
+        stages: [pre-commit, manual]
       - id: check-added-large-files
-        stages: [commit, manual]
+        stages: [pre-commit, manual]
       - id: check-ast
-        stages: [commit, manual]
+        stages: [pre-commit, manual]
       - id: name-tests-test
         args: ["--pytest-test-first"]
-        stages: [commit]
+        stages: [pre-commit]
 
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.27.3
+    rev: 0.29.4
     hooks:
       - id: check-github-actions
         args: ["--verbose"]
-        stages: [commit, manual]
+        stages: [pre-commit, manual]
       - id: check-github-workflows
         args: ["--verbose"]
-        stages: [commit, manual]
+        stages: [pre-commit, manual]
 
   - repo: https://github.com/codespell-project/codespell
-    rev: v2.2.6
+    rev: v2.3.0
     hooks:
       - id: codespell
         additional_dependencies:
           - tomli
-        stages: [commit, manual]
+        stages: [pre-commit, manual]
 
   # ruff - linting and formatting
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.1.14"
+    rev: "v0.6.9"
     hooks:
       - id: ruff
         name: ruff
-        stages: [commit, manual]
+        stages: [pre-commit, manual]
 
   # mypy - lint-like type checking
   #  - repo: https://github.com/pre-commit/mirrors-mypy
@@ -72,7 +72,7 @@ repos:
         args: [--in-place]
         additional_dependencies: [tomli]
         files: (^src/|^tests/|^docs/)
-        stages: [commit, manual]
+        stages: [pre-commit, manual]
 
   # prettier - formatting JS, CSS, JSON, Markdown, ...
   - repo: https://github.com/pre-commit/mirrors-prettier
@@ -81,11 +81,11 @@ repos:
       - id: prettier
         exclude: (^poetry.lock|docs/_sidebar.yml)
         types_or: [css, javascript, markdown, yaml, json]
-        stages: [commit, manual]
+        stages: [pre-commit, manual]
 
   # bandit - find common security issues
   - repo: https://github.com/pycqa/bandit
-    rev: 1.7.7
+    rev: 1.7.10
     hooks:
       - id: bandit
         name: bandit
@@ -93,7 +93,7 @@ repos:
         args:
           - -r
           - src
-        stages: [commit]
+        stages: [pre-commit]
 
   - repo: local
     hooks:
@@ -103,4 +103,4 @@ repos:
         language: system
         types: [python]
         pass_filenames: false
-        stages: [commit]
+        stages: [pre-commit]
