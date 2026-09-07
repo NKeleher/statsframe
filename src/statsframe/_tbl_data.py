@@ -100,10 +100,12 @@ else:
         Represent some DataFrame.
         """
 
+
     class SeriesLike(ABC):
         """
         Represent some Series.
         """
+
 
     DataFrameLike.register(PdDataFrame)
     DataFrameLike.register(PlDataFrame)
@@ -183,7 +185,6 @@ def _get_cell(data: DataFrameLike, row: int, column: str) -> Any:
     """
     Get the content from a single cell in the input data table.
     """
-
     _raise_not_implemented(data)
 
 
@@ -303,7 +304,6 @@ def eval_select(data: DataFrameLike, expr: SelectExpr, strict: bool = True) -> _
     """
     Return a list of column names selected by expr.
     """
-
     raise NotImplementedError(f"Unsupported type: {type(expr)}")
 
 
