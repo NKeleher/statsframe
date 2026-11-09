@@ -56,7 +56,6 @@ stats = sf.skim_frame(df)
 
 # %%
 (df.pipe(sf.skim_frame, output="gt"))
-
 # %% [markdown]
 """
 We can achieve the same result above with a pandas DataFrame.
